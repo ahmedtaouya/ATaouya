@@ -49,60 +49,36 @@ const  Home = () => {
         Software, future ingénieur informatique et réseaux
       </Typography>
       <Button
-  variant="contained"
-  sx={{
-    width: '125px',
-    height: '45px',
-    borderRadius: '20px',
-    border: 'none',
-    boxShadow: '1px 1px rgba(107, 221, 215, 0.37)',
-    padding: '5px 10px',
-    background: 'rgba(0, 0, 0, 0.4)',
-    color: 'white',
-    fontFamily: 'Roboto, sans-serif',
-    fontWeight: 505,
-    fontSize: '16px',
-    lineHeight: 1,
-    cursor: 'pointer',
-    filter: 'drop-shadow(0 0 10px rgba(59, 190, 230, 0.568))',
-    transition: '.5s linear',
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '&:hover': {
-      width: '50px',
-      height: '50px',
-      borderRadius: '50%',
-      transition: '.5s linear',
-      '& .texto': {
-        display: 'none',
-      },
-      '& .mysvg': {
-        display: 'inline',
-      },
-      '&::before': {
-        content: "''",
-        position: 'absolute',
-        top: '-3px',
-        left: '-3px',
-        width: '100%',
-        height: '100%',
-        border: '3.5px solid transparent',
-        borderTop: '3.5px solid #fff',
-        borderRight: '3.5px solid #fff',
-        borderRadius: '50%',
-        animation: 'animateC 2s linear infinite',
-      },
-    },
-  }}
-  href="/images/cv.pdf" // Replace with the actual path to your CV file
-  download="Ahmed_TAOUYA_CV.pdf" // Set the default file name for download
-  // Optional download icon
->
-<span class="texto">Download</span>
-    <svg className="mysvg" style={{ display: 'none' }} /* Your SVG icon code */ />
-</Button>
+      variant="contained"
+      sx={{
+        textDecoration: 'none',
+        color: '#fff',
+        fontFamily: 'sans-serif',
+        fontWeight: 600,
+        borderRadius: '50px',
+        border: '2px rgba(0, 0, 0, 0.4)',
+        padding: '14px 40px',
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: '#fff',
+          color: '#4e484a',
+        },
+      }}
+      href="/images/cv.pdf"
+      download="Ahmed_TAOUYA_CV.pdf"
+    >
+      <span
+        style={{
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        Download CV
+      </span>
+    </Button>
 
 
     </Box>
