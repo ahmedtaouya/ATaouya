@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,22 +16,63 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {
-    FaGithub,
-    FaMailBulk,
-    FaLinkedin,
-  } from 'react-icons/fa';
-
+import { FaGithub, FaMailBulk, FaLinkedin } from 'react-icons/fa';
+import { FormControl, Select, MenuItem, Box as MuiBox, Typography as MuiTypography } from '@mui/material';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
+import Flag from "react-world-flags";
+import "../i18n";
 const drawerWidth = 240;
 const navItems = ['contact', 'Linkedin', 'Github'];
+const LanguageSelector = ({ language, handleLanguageChange, isMobile }) => (
+    <FormControl sx={{ mr: 2 }} size="small">
+        <Select
+            value={language}
+            onChange={handleLanguageChange}
+            size="small"
+            sx={{
+                boxShadow: "none",
+                ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                minWidth: 100,
+            }}
+        >
+            {[
+                { code: "fr", flag: "FR", label: "FR" },
+                { code: "en", flag: "US", label: "EN" },
+                { code: "ar", flag: "MA", label: "AR" },
+            ].map((lang) => (
+                <MenuItem key={lang.code} value={lang.code}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Typography variant="body2" color="secondary">
+                            {lang.label}
+                        </Typography>
+                        <Flag code={lang.flag} style={{ width: 24, height: 16 }} />
+                    </Box>
+                </MenuItem>
+            ))}
+        </Select>
+    </FormControl>
+);
 
 function DrawerAppBar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { t, i18n } = useTranslation();
+    const [language, setLanguage] = useState(i18n.language);
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
+
+    const handleLanguageChange = (event) => {
+        const lng = event.target.value;
+        setLanguage(lng);
+        i18n.changeLanguage(lng);
+    };
+
+    useEffect(() => {
+        setLanguage(i18n.language);
+    }, [i18n.language]);
+
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -82,24 +123,30 @@ function DrawerAppBar(props) {
                         />
                     </Typography>
                     <IconButton
-                component="a"
-                href="https://github.com/ahmedtaouya"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'white', '&:hover': { color: '#1877F2' } }}
-              >
-                <FaGithub size={30} />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://www.linkedin.com/in/ahmed-taouya-3b3563252/"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'white', '&:hover': { color: '#1DA1F2' } }}
-              >
-                <FaLinkedin size={30} />
-              </IconButton>
-   
+                        component="a"
+                        href="https://github.com/ahmedtaouya"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ color: 'white', '&:hover': { color: '#1877F2' } }}
+                    >
+                        <FaGithub size={30} />
+                    </IconButton>
+                    <IconButton
+                        component="a"
+                        href="https://www.linkedin.com/in/ahmed-taouya-3b3563252/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ color: 'white', '&:hover': { color: '#1DA1F2' } }}
+                    >
+                        <FaLinkedin size={30} />
+                    </IconButton>
+
+                    {/* Language Selector */}
+                    <LanguageSelector
+                        language={language}
+                        handleLanguageChange={handleLanguageChange}
+                    />
+
                 </Toolbar>
             </AppBar>
             <nav>

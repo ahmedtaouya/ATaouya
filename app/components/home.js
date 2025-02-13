@@ -3,14 +3,14 @@
 import React from 'react';
 import { Box, Typography ,Button } from '@mui/material';
 import { useRouter } from 'next/navigation'; 
-import DownloadIcon from '@mui/icons-material/Download';
+// import DownloadIcon from '@mui/icons-material/Download';
 // import Ah from 'public/images/ahmed.jpg';
+import { useTranslation } from 'react-i18next';
 const  Home = () => {
-  const router = useRouter();
+ 
 
-  const handleClick = () => {
-    router.push('/me'); // Redirige vers /me
-  };
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -40,13 +40,13 @@ const  Home = () => {
       }}
     >
       <Typography variant="h2" gutterBottom>
-        Bonjour
+        {t("hero.greeting")}
       </Typography>
       <Typography variant="h4" gutterBottom>
-        Je m'appelle Ahmed TAOUYA
+        {t("hero.title")}
       </Typography>
       <Typography variant="h6" gutterBottom>
-        Software, future ingénieur informatique et réseaux
+      {t("button.descrption")}
       </Typography>
       <Button
       variant="contained"
@@ -76,7 +76,7 @@ const  Home = () => {
           zIndex: 2,
         }}
       >
-        Download CV
+       {t("button.download")}
       </span>
     </Button>
 
@@ -109,6 +109,7 @@ const  Home = () => {
       width: '100%',
     }}
   />
+  {t("hero.greeting")}
 </Box>
 
     </Box>
