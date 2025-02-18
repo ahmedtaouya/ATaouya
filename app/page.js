@@ -6,7 +6,7 @@ import Comp from "./components/com";
 import Footer from "./components/Footer";
 import Projet from "./components/projet";
 import Career from "./components/carrer";
-
+// import Ah  from "./components/ah";
 export default function pages() {
   return (
     <>

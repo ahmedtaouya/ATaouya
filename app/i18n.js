@@ -34,7 +34,16 @@ const resources = {
     "title": "Full-stack Developer",
     "description1": "Passionate about innovation and modern technologies, I am a versatile developer with expertise in web development and software design. Currently in my third year of computer and network engineering at EMSI.",
     "description2": "My experience includes ambitious projects and participation in a hackathon, where I won first place with an innovative solution developed in a team.",
-    "description3": "My analytical mindset, ability to solve complex problems, and passion for collaborative work allow me to thrive in dynamic environments."
+    "description3": "My analytical mindset, ability to solve complex problems, and passion for collaborative work allow me to thrive in dynamic environments.",
+    "contactInfo": "Contact Information",
+    "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
+    "phone": "0652954880",
+    "email": "ahmad.taouya@gmail.com",
+    "getInTouch": "Get in Touch",
+    "name": "Name",
+    "emailLabel": "Email",
+    "message": "Message",
+    "submit": "Submit"
 
     }
   },
@@ -69,8 +78,16 @@ const resources = {
     "title": "Développeur Full-stack",
     "description1": "Passionné par l'innovation et les technologies modernes, je suis un développeur polyvalent avec une expertise en développement web et en conception de logiciels. Actuellement en 3ème année d’ingénierie informatique et réseaux à l’EMSI.",
     "description2": "Mon expérience inclut des projets ambitieux, ainsi que la participation à un hackathon, où j'ai remporté la première place grâce à une solution innovante développée en équipe.",
-    "description3": "Mon esprit d’analyse, ma capacité à résoudre des problèmes complexes et mon goût pour le travail collaboratif me permettent de m’épanouir dans des environnements dynamiques."
-  
+    "description3": "Mon esprit d’analyse, ma capacité à résoudre des problèmes complexes et mon goût pour le travail collaboratif me permettent de m’épanouir dans des environnements dynamiques.",
+  "contactInfo": "Informations de contact",
+        "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
+        "phone": "0652954880",
+        "email": "ahmad.taouya@gmail.com",
+        "getInTouch": "Nous contacter",
+        "name": "Nom",
+        "emailLabel": "E-mail",
+        "message": "Message",
+        "submit": "Envoyer"
     }
   },
   ar: {
@@ -104,7 +121,16 @@ const resources = {
         "title": "مطوّر Full-stack",
         "description1": "شغوف بالابتكار والتقنيات الحديثة، أنا مطوّر متعدد المهارات بخبرة في تطوير الويب وتصميم البرمجيات. حاليًا في السنة الثالثة من الهندسة المعلوماتية والشبكات في EMSI.",
         "description2": "تشمل خبرتي مشاريع طموحة، بالإضافة إلى المشاركة في هاكاثون، حيث فزت بالمركز الأول بفضل حل مبتكر تم تطويره ضمن فريق.",
-        "description3": "تسمح لي قدرتي التحليلية، والقدرة على حل المشكلات المعقدة، وشغفي بالعمل التعاوني، بالنجاح في بيئات ديناميكية."
+        "description3": "تسمح لي قدرتي التحليلية، والقدرة على حل المشكلات المعقدة، وشغفي بالعمل التعاوني، بالنجاح في بيئات ديناميكية.",
+        "contactInfo": "معلومات الاتصال",
+        "location": "4 شارع سيدي موسى الدوكالي، سلا، سلا الجديدة",
+        "phone": "0652954880",
+        "email": "ahmad.taouya@gmail.com",
+        "getInTouch": "اتصل بنا",
+        "name": "الاسم",
+        "emailLabel": "البريد الإلكتروني",
+        "message": "الرسالة",
+        "submit": "إرسال"
    
     }
   }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Tooltip, Card, CardContent, Button, CardMedia } from "@mui/material";
+import { Box, Typography, Tooltip, Card, CardContent, Button, CardMedia ,Container, Divider} from "@mui/material";
 import { SiCplusplus, SiPhp, SiJavascript, SiHtml5, SiCss3, SiBootstrap, SiMui } from "react-icons/si";
 import { SiReact, SiNodedotjs, SiNextdotjs, SiLaravel, SiFigma } from "react-icons/si";
 import { FaDatabase, FaWindows, FaLinux, FaTerminal, FaProjectDiagram } from "react-icons/fa";
@@ -12,58 +12,12 @@ import Slider from "react-slick";
 import { Lens } from "./ui/lens";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { AnimatedTooltip } from "./ui/animated-tooltip";
+import technologies from "../data/technologies";
+import { TypeAnimation } from "react-type-animation";
 
-const sections = [
-  {
-    title: "Programming Languages",
-    description: "Core technologies I work with daily:",
-    skills: [
-      { Icon: SiJavascript, label: "JavaScript", color: "#f7df1e", tooltip: "Programming language" },
-      { Icon: SiPhp, label: "PHP", color: "#8993be", tooltip: "Programming language" },
-      { Icon: SiHtml5, label: "HTML", color: "#e34f26", tooltip: "Markup language" },
-      { Icon: SiCss3, label: "CSS", color: "#1572b6", tooltip: "Styling language" },
-      { Icon: SiCplusplus, label: "C++", color: "#00599C", tooltip: "Programming language" },
-    ],
-  },
-  {
-    title: "Frameworks & Libraries",
-    description: "Modern tools I use to build robust applications:",
-    skills: [
-      { Icon: SiReact, label: "React.js", color: "#61dafb", tooltip: "Frontend library" },
-      { Icon: SiNodedotjs, label: "Node.js", color: "#68a063", tooltip: "Backend runtime" },
-      { Icon: SiNextdotjs, label: "Next.js", color: "#000000", tooltip: "React framework" },
-      { Icon: SiBootstrap, label: "Bootstrap", color: "#563d7c", tooltip: "CSS framework" },
-      { Icon: SiMui, label: "MUI", color: "#007FFF", tooltip: "React component library" },
-      { Icon: SiLaravel, label: "Laravel", color: "#ff2d20", tooltip: "PHP framework" },
-    ],
-  },
-  {
-    title: "Databases",
-    description: "Technologies I use to manage data:",
-    skills: [
-      { Icon: FaDatabase, label: "SQL", color: "#4479A1", tooltip: "Structured Query Language" },
-      { Icon: FaDatabase, label: "PL/SQL", color: "#cc0000", tooltip: "Oracle Procedural Language" },
-    ],
-  },
-  {
-    title: "Design & Architecture",
-    description: "Concepts and tools for software design:",
-    skills: [
-      { Icon: AiOutlineCluster, label: "Merise", color: "#2A324B", tooltip: "Design methodology" },
-      { Icon: AiOutlineCluster, label: "Merise 2", color: "#2A324B", tooltip: "Advanced Merise" },
-      { Icon: FaProjectDiagram, label: "UML", color: "#3A524B", tooltip: "Unified Modeling Language" },
-    ],
-  },
-  {
-    title: "Operating Systems",
-    description: "Platforms I work with:",
-    skills: [
-      { Icon: FaWindows, label: "Windows", color: "#00ADEF", tooltip: "Operating system" },
-      { Icon: FaLinux, label: "Linux", color: "#FCC624", tooltip: "Operating system" },
-      { Icon: FaTerminal, label: "Unix", color: "#81B3A3", tooltip: "Unix-based systems" },
-    ],
-  },
-];
+const { languages, frameworks, databases,systems } = technologies;
+
 const certificates = [
   {
     title: "The unix Workbench",
@@ -111,126 +65,119 @@ function Competencies() {
   const [hovering, setHovering] = useState(false);
   return (
     <Box
-      sx={{
-        p: 4,
-        display: "flex",
-        flexDirection: "row", // Stack sections vertically
-        alignItems: "center", // Center align content horizontally
-        gap: 6, // Space between sections
-      }}
-    >
-      {/* Skills Section */}
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: 800, // Limit the width for better alignment
-        }}
-      >
-        {sections.map((section, index) => (
-          <Box
-            key={index}
-            sx={{
-              mb: 6,
-              textAlign: "center", // Center-align section titles and descriptions
-            }}
-          >
-            <Typography
-              variant="h5"
-              sx={{ color: "", fontWeight: "bold", mb: 2 }}
-            >
-              {section.title}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: "", mb: 4, fontSize: "1rem" }}
-            >
-              {section.description}
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 3, // Space between skill icons
-                justifyContent: "center", // Center the icons
-              }}
-            >
-              {section.skills.map(({ Icon, label, color, tooltip }, skillIndex) => (
-                <Tooltip key={skillIndex} title={`${label} - ${tooltip}`} arrow>
-                  <Box
-                    sx={{
-                      width: 60,
-                      height: 60,
-                      backgroundColor: "#fff",
-                      borderRadius: "50%",
-                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: "transform 0.2s ease-in-out",
-                      "&:hover": {
-                        transform: "scale(1.1)",
-                      },
-                    }}
-                  >
-                    <Icon size={30} style={{ color }} />
-                  </Box>
-                </Tooltip>
-              ))}
-            </Box>
-          </Box>
-        ))}
-      </Box>
+  sx={{
+    p: 4,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 80, // Augmente l’espace entre les sections
+  }}
+>
+  {/* Skills Section */}
+  <Card
+  sx={{
+   flex: 0.8,
+    mr: 2,
+    p: 3, // Ajoute du padding pour éviter que le contenu touche les bords
+    borderRadius: 3, // Arrondit les bords du cadre
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Ajoute une ombre douce
+    backgroundColor: "rgba(0, 0, 0, 0.4)", // Fond blanc pour le contraste
+  }}
+>
+  <Typography variant="h3" gutterBottom color="black">
+    Competencies
+  </Typography>
 
-      {/* Certificates Section */}
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: 800, // Align with the skills section
-          textAlign: "center",
-        }}
-      >
-        <Typography
-          variant="h4"
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="h4" color="white" gutterBottom>
+      Programming Languages
+    </Typography>
+    <Typography variant="body1" color="white" sx={{ mb: 2 }}>
+      Core technologies I work with daily:
+    </Typography>
+    <Container className="flex flex-row flex-wrap gap-4">
+      <AnimatedTooltip items={languages} />
+    </Container>
+  </Box>
+  <Divider sx={{ my: 4 }} />
+
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="h4" color="white" gutterBottom>
+      Frameworks
+   
+    </Typography>
+    <Typography variant="body1" color="white" sx={{ mb: 2 }}>
+      Modern tools I use to build robust applications:
+    </Typography>
+    <Container className="flex flex-row flex-wrap gap-4">
+      <AnimatedTooltip items={frameworks} />
+    </Container>
+  </Box>
+  <Divider sx={{ my: 4 }} />
+
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="h4" color="white" gutterBottom>
+      Database Technologies
+    </Typography>
+    <Typography variant="body1" color="white" sx={{ mb: 2 }}>
+      Database systems I'm proficient with:
+    </Typography>
+    <Container className="flex flex-row flex-wrap gap-4">
+      <AnimatedTooltip items={databases} />
+    </Container>
+  </Box>
+  <Divider sx={{ my: 4 }} />
+
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="h4" color="white" gutterBottom>
+      Operating Systems
+    </Typography>
+    <Typography variant="body1" color="white" sx={{ mb: 2 }}>
+      Operating Systems:
+    </Typography>
+    <Container className="flex flex-row flex-wrap gap-4">
+      <AnimatedTooltip items={systems} />
+    </Container>
+  </Box>
+</Card>
+
+
+  {/* Certificates Section */}
+  <Box
+    sx={{
+      width: "100%",
+      maxWidth: 450,
+      textAlign: "center",
+      ml: 2, // Ajoute un espace à gauche
+    }}
+  >
+    <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
+      Certificates
+    </Typography>
+    <Slider {...settings}>
+      {certificates.map((cert, index) => (
+        <Card
+          key={index}
           sx={{
-            color: "",
-            fontWeight: "bold",
-            mb: 4,
+            margin: "auto",
+            maxWidth: 400,
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+            borderRadius: 3,
+            padding: 2,
           }}
         >
-          Certificates
-        </Typography>
-        <Slider {...settings}>
-          {certificates.map((cert, index) => (
-            <Card
-              key={index}
-              sx={{
-                margin: "auto",
-                maxWidth: 400,
-                boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-                borderRadius: 3,
-                padding: 2,
-              }}
-            >
+          <Lens hovering={hovering} setHovering={setHovering}>
+            <CardMedia component="img" alt={cert.title} height="200" image={cert.image} />
+          </Lens>
+          <CardContent>
+            <Typography variant="h6">{cert.title}</Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </Slider>
+  </Box>
+</Box>
 
-              <Lens hovering={hovering} setHovering={setHovering}>
-                <CardMedia
-                  component="img"
-                  alt={cert.title}
-                  height="200"
-                  image={cert.image}
-
-                /></Lens>
-
-              <CardContent>
-                <Typography variant="h6" sx={{ color: "" }}>
-                  {cert.title}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </Slider>
-      </Box>
-    </Box>
   );
 }
 

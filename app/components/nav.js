@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next'; // Import the useTranslation hoo
 import Flag from "react-world-flags";
 import "../i18n";
 const drawerWidth = 240;
-const navItems = ['contact', 'Linkedin', 'Github'];
+const navItems = ['Linkedin', 'Github'];
 const LanguageSelector = ({ language, handleLanguageChange, isMobile }) => (
     <FormControl sx={{ mr: 2 }} size="small">
         <Select
@@ -98,7 +98,7 @@ function DrawerAppBar(props) {
             <AppBar
                 component="nav"
                 sx={{
-                    backgroundColor: 'transparent', // Apply background color here
+                    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Apply background color here
                 }}
             >
                 <Toolbar>
@@ -107,7 +107,7 @@ function DrawerAppBar(props) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{ mr: 3, display: { sm: 'none' } }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -127,19 +127,22 @@ function DrawerAppBar(props) {
                         href="https://github.com/ahmedtaouya"
                         target="_blank"
                         rel="noopener noreferrer"
-                        sx={{ color: 'white', '&:hover': { color: '#1877F2' } }}
+                        sx={{ backgroundColor: 'white', '&:hover': { backgroundColor: '#1877F2', color: 'white' },
+                        marginRight: '8px' }}
                     >
-                        <FaGithub size={30} />
+                        <FaGithub size={25} color="#000" />
                     </IconButton>
                     <IconButton
                         component="a"
                         href="https://www.linkedin.com/in/ahmed-taouya-3b3563252/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        sx={{ color: 'white', '&:hover': { color: '#1DA1F2' } }}
+                        sx={{ backgroundColor: 'white', '&:hover': { backgroundColor: '#1DA1F2', color: 'white' },
+                        marginRight: '8px'  }}
                     >
-                        <FaLinkedin size={30} />
+                        <FaLinkedin size={25} color="#000" />
                     </IconButton>
+
 
                     {/* Language Selector */}
                     <LanguageSelector

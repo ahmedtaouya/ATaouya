@@ -1,131 +1,88 @@
-import React from 'react';
-import { Box, Container, Grid, Typography, TextField, Button } from '@mui/material';
-import { FaSearchLocation, FaPhone, FaMailBulk } from 'react-icons/fa';
+import React, { useState } from "react";
+import { Box, Container, Grid, Typography, TextField, Button } from "@mui/material";
+import { FaSearchLocation, FaPhone, FaMailBulk } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import "../i18n";
 
 const Footer = () => {
+  const { t } = useTranslation();
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(null);
+    
+    try {
+      const response = await fetch("/api/sendmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      
+      const result = await response.json();
+      setSuccess(result.success);
+    } catch (error) {
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <Box sx={{ bgcolor: 'transparent', py: 4 }}>
+    <Box sx={{ bgcolor: "transparent", py: 4 }}>
       <Container maxWidth="lg">
         <Grid container spacing={10}>
           {/* Contact Information Section */}
           <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                bgcolor: 'rgba(0, 0, 0, 0.4)',
-                p: 4,
-                borderRadius: '10px',
-                boxShadow: 3,
-              }}
-            >
-              <Typography variant="h6" mb={2} sx={{ color: 'white' }}>
-                Contact Information
+            <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.4)", p: 4, borderRadius: "10px", boxShadow: 3 }}>
+              <Typography variant="h6" mb={2} sx={{ color: "white" }}>
+                {t("contactInfo")}
               </Typography>
               <Box sx={{ mb: 2 }}>
-                <Typography
-                  variant="body1"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  sx={{ color: 'white' }}
-                >
+                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
                   <FaSearchLocation size={20} />
-                  4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA
+                  {t("location")}
                 </Typography>
               </Box>
               <Box sx={{ mb: 2 }}>
-                <Typography
-                  variant="body1"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  sx={{ color: 'white' }}
-                >
+                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
                   <FaPhone size={20} />
-                  0652954880
+                  {t("phone")}
                 </Typography>
               </Box>
               <Box>
-                <Typography
-                  variant="body1"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  sx={{ color: 'white' }}
-                >
+                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
                   <FaMailBulk size={20} />
-                  ahmad.taouya@gmail.com
+                  {t("email")}
                 </Typography>
               </Box>
             </Box>
           </Grid>
+
           {/* Get in Touch Form */}
           <Grid item xs={12} md={6}>
-            <Box
-              component="form"
-              sx={{
-                bgcolor: 'rgba(0, 0, 0, 0.4)',
-                p: 4,
-                borderRadius: '10px',
-                boxShadow: 3,
-              }}
-            >
-              <Typography variant="h6" mb={2} sx={{ color: 'white' }}>
-                Get in Touch
+            <Box component="form" onSubmit={handleSubmit} sx={{ bgcolor: "rgba(0, 0, 0, 0.4)", p: 4, borderRadius: "10px", boxShadow: 3 }}>
+              <Typography variant="h6" mb={2} sx={{ color: "white" }}>
+                {t("getInTouch")}
               </Typography>
-              <TextField
-                fullWidth
-                label="Name"
-                variant="outlined"
-                InputLabelProps={{ style: { color: 'white' } }}
-                sx={{
-                  mb: 2,
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white',
-                    '& fieldset': { borderColor: 'white' },
-                    '&:hover fieldset': { borderColor: 'white' },
-                    '&.Mui-focused fieldset': { borderColor: 'white' },
-                  },
-                }}
-                required
-              />
-              <TextField
-                fullWidth
-                label="Email"
-                variant="outlined"
-                type="email"
-                InputLabelProps={{ style: { color: 'white' } }}
-                sx={{
-                  mb: 2,
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white',
-                    '& fieldset': { borderColor: 'white' },
-                    '&:hover fieldset': { borderColor: 'white' },
-                    '&.Mui-focused fieldset': { borderColor: 'white' },
-                  },
-                }}
-                required
-              />
-              <TextField
-                fullWidth
-                label="Message"
-                variant="outlined"
-                multiline
-                rows={4}
-                InputLabelProps={{ style: { color: 'white' } }}
-                sx={{
-                  mb: 3,
-                  '& .MuiOutlinedInput-root': {
-                    color: 'white',
-                    '& fieldset': { borderColor: 'white' },
-                    '&:hover fieldset': { borderColor: 'white' },
-                    '&.Mui-focused fieldset': { borderColor: 'white' },
-                  },
-                }}
-                required
-              />
-              <Button variant="contained" color="primary" fullWidth>
-                Submit
+              <TextField fullWidth label={t("name")} name="name" value={formData.name} onChange={handleChange} variant="outlined" required sx={{ mb: 2, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
+              <TextField fullWidth label={t("emailLabel")} name="email" type="email" value={formData.email} onChange={handleChange} variant="outlined" required sx={{ mb: 2, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
+              <TextField fullWidth label={t("message")} name="message" multiline rows={4} value={formData.message} onChange={handleChange} variant="outlined" required sx={{ mb: 3, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
+              <Button variant="contained" color="primary" fullWidth type="submit" disabled={loading}>
+                {loading ? t("sending") : t("submit")}
               </Button>
+              {success !== null && (
+                <Typography mt={2} sx={{ color: success ? "green" : "red" }}>
+                  {success ? t("messageSent") : t("messageError")}
+                </Typography>
+              )}
             </Box>
           </Grid>
         </Grid>
