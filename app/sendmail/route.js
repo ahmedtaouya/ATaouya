@@ -1,56 +1,39 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
+// pages/api/sendmail.js
 
-dotenv.config();
+import nodemailer from 'nodemailer';
 
-export async function POST(request) {
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { to, subject, text } = req.body;
+
+  if (!to || !subject || !text) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
   try {
-    const { name, email, message } = await request.json();
-
-    // Log environment variables for debugging
-    console.log("Email User:", process.env.EMAIL_USER);
-    console.log("Email Pass:", process.env.EMAIL_PASS);
-
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      throw new Error("Missing email credentials");
-    }
-
-    // Create a transporter object using Gmail
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      secure: false, // use true if using 465
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
-    // Define email options
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Send to yourself or another recipient
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-    };
-
-    // Send the email
-    await transporter.sendMail(mailOptions);
-
-    // Return a success response
-    return new Response(JSON.stringify({ message: "Email sent successfully!" }), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+    await transporter.sendMail({
+      from: `"My App" <${process.env.SMTP_USER}>`,
+      to,
+      subject,
+      text,
     });
+
+    res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error("Error sending email:", error);
-
-    // Return an error response
-    return new Response(JSON.stringify({ message: "Failed to send email." }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    console.error('SendMail error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }

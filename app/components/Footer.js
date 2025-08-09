@@ -59,7 +59,7 @@ const Footer = () => {
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
-                  <FaSearchLocation size={20} />
+                  <FaSearchLocation size={20} color="white" />
                   {t("location")}
                 </Typography>
               </Box>

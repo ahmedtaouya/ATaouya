@@ -70,24 +70,19 @@ function Competencies() {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 80, // Augmente l’espace entre les sections
+    gap: 8, // Augmente l’espace entre les sections
   }}
 >
   {/* Skills Section */}
-  <Card
-  sx={{
-   flex: 0.8,
-    mr: 2,
-    p: 3, // Ajoute du padding pour éviter que le contenu touche les bords
-    borderRadius: 3, // Arrondit les bords du cadre
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Ajoute une ombre douce
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // Fond blanc pour le contraste
-  }}
->
-  <Typography variant="h3" gutterBottom color="black">
+<Card
+sx={
+  {backgroundColor: "rgba(0, 0, 0, 0.4)",
+   padding:4, // Fond noir
+    
+ }}> <Typography variant="h3" gutterBottom color="black">
     Competencies
   </Typography>
-
+  
   <Box sx={{ mb: 4 }}>
     <Typography variant="h4" color="white" gutterBottom>
       Programming Languages
@@ -138,8 +133,10 @@ function Competencies() {
     <Container className="flex flex-row flex-wrap gap-4">
       <AnimatedTooltip items={systems} />
     </Container>
-  </Box>
-</Card>
+  </Box></Card>
+ 
+
+
 
 
   {/* Certificates Section */}
@@ -148,7 +145,7 @@ function Competencies() {
       width: "100%",
       maxWidth: 450,
       textAlign: "center",
-      ml: 2, // Ajoute un espace à gauche
+      ml: 40, // Ajoute un espace à gauche
     }}
   >
     <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
