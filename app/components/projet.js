@@ -4,7 +4,7 @@ import nutri from "public/images/nutri.png";
 import syndi from "public/images/syndi.png";
 import tab from "public/images/TAB.jpg";
 import fallbackImage from "public/images/default.png"; 
-import NANA from "public/images/NANA.png";
+import GRR from "public/images/GRR.png";
 
 const testimonials = [
     {
@@ -37,10 +37,10 @@ const testimonials = [
     },
     {
       quote:
-        "Portfolio pour decrire mon carrière",
-      name: "PORFOLIO",
-      designation: "NEXT.JS",
-      src: NANA,
+        "MedTrack est une application de gestion de médicaments qui permet aux utilisateurs de suivre leur consommation de médicaments, de recevoir des rappels et de gérer leurs prescriptions.",
+      name: "MEDTRACK",
+      designation: "VITE.JS",
+      src: GRR,
     },
   ];
 

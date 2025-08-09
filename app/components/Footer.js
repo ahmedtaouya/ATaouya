@@ -3,32 +3,44 @@ import { Box, Container, Grid, Typography, TextField, Button } from "@mui/materi
 import { FaSearchLocation, FaPhone, FaMailBulk } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import "../i18n";
+// import ".next/server/app/api/sendmail";
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(null);
-    
+
     try {
-      const response = await fetch("/api/sendmail", {
+      const response = await fetch("/sendmail", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
-      
-      const result = await response.json();
-      setSuccess(result.success);
+
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", message: "" }); // Clear form
+      } else {
+        setSuccess(false);
+      }
     } catch (error) {
+      console.error("Error sending email:", error);
       setSuccess(false);
     } finally {
       setLoading(false);
@@ -72,9 +84,66 @@ const Footer = () => {
               <Typography variant="h6" mb={2} sx={{ color: "white" }}>
                 {t("getInTouch")}
               </Typography>
-              <TextField fullWidth label={t("name")} name="name" value={formData.name} onChange={handleChange} variant="outlined" required sx={{ mb: 2, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
-              <TextField fullWidth label={t("emailLabel")} name="email" type="email" value={formData.email} onChange={handleChange} variant="outlined" required sx={{ mb: 2, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
-              <TextField fullWidth label={t("message")} name="message" multiline rows={4} value={formData.message} onChange={handleChange} variant="outlined" required sx={{ mb: 3, "& .MuiOutlinedInput-root": { color: "white", "& fieldset": { borderColor: "white" }, "&:hover fieldset": { borderColor: "white" }, "&.Mui-focused fieldset": { borderColor: "white" } } }} InputLabelProps={{ style: { color: "white" } }} />
+              <TextField
+                fullWidth
+                label={t("name")}
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                variant="outlined"
+                required
+                sx={{
+                  mb: 2,
+                  "& .MuiOutlinedInput-root": {
+                    color: "white",
+                    "& fieldset": { borderColor: "white" },
+                    "&:hover fieldset": { borderColor: "white" },
+                    "&.Mui-focused fieldset": { borderColor: "white" },
+                  },
+                }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+              <TextField
+                fullWidth
+                label={t("emailLabel")}
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                variant="outlined"
+                required
+                sx={{
+                  mb: 2,
+                  "& .MuiOutlinedInput-root": {
+                    color: "white",
+                    "& fieldset": { borderColor: "white" },
+                    "&:hover fieldset": { borderColor: "white" },
+                    "&.Mui-focused fieldset": { borderColor: "white" },
+                  },
+                }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
+              <TextField
+                fullWidth
+                label={t("message")}
+                name="message"
+                multiline
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                variant="outlined"
+                required
+                sx={{
+                  mb: 3,
+                  "& .MuiOutlinedInput-root": {
+                    color: "white",
+                    "& fieldset": { borderColor: "white" },
+                    "&:hover fieldset": { borderColor: "white" },
+                    "&.Mui-focused fieldset": { borderColor: "white" },
+                  },
+                }}
+                InputLabelProps={{ style: { color: "white" } }}
+              />
               <Button variant="contained" color="primary" fullWidth type="submit" disabled={loading}>
                 {loading ? t("sending") : t("submit")}
               </Button>
