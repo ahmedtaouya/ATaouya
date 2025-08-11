@@ -106,6 +106,12 @@ export const AnimatedTestimonials = ({
             <p className="text-sm text-gray-500 dark:text-neutral-500">
               {testimonials[active].designation}
             </p>
+            <a href="https://nutriform.vercel.app/" className="text-blue-600 font-medium hover:underline
+             hover:text-blue-800 transition-colors duration-200" >{testimonials[active].link}</a>
+            <a href="https://syndinet.vercel.app/" className="text-blue-600 font-medium hover:underline
+             hover:text-blue-800 transition-colors duration-200" >{testimonials[active].link2}</a>
+            <a href="https://medtrack-vite.vercel.app/" className="text-blue-600 font-medium hover:underline
+             hover:text-blue-800 transition-colors duration-200" >{testimonials[active].link3}</a>
             <motion.p className="text-lg text-gray-500 mt-8 dark:text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span

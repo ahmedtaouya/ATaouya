@@ -6,6 +6,7 @@ import Comp from "./components/com";
 import Footer from "./components/Footer";
 import Projet from "./components/projet";
 import Career from "./components/carrer";
+import Cours from "./components/Cours";
 // import Ah  from "./components/ah";
 export default function pages() {
   return (
@@ -15,6 +16,7 @@ export default function pages() {
         <Home />
         <Career/>
         <Comp/>
+        {/* <Cours/> */}
         <Me />
         <Projet/>
         <Footer />

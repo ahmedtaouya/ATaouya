@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { Box, Typography, Tooltip, Card, CardContent, Button, CardMedia ,Container, Divider} from "@mui/material";
+import { Box, Typography, Tooltip, Card, CardContent, Button, CardMedia ,Container, Divider, Modal} from "@mui/material";
 import { SiCplusplus, SiPhp, SiJavascript, SiHtml5, SiCss3, SiBootstrap, SiMui } from "react-icons/si";
 import { SiReact, SiNodedotjs, SiNextdotjs, SiLaravel, SiFigma } from "react-icons/si";
 import { FaDatabase, FaWindows, FaLinux, FaTerminal, FaProjectDiagram } from "react-icons/fa";
@@ -15,8 +16,10 @@ import { cn } from "@/lib/utils";
 import { AnimatedTooltip } from "./ui/animated-tooltip";
 import technologies from "../data/technologies";
 import { TypeAnimation } from "react-type-animation";
+import { CardContainer, CardBody, CardItem } from "./ui/3d-card.jsx";
 
 const { languages, frameworks, databases,systems } = technologies;
+
 
 const certificates = [
   {
@@ -63,6 +66,18 @@ const settings = {
 
 function Competencies() {
   const [hovering, setHovering] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleOpen = (image) => {
+    setSelectedImage(image);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage(null);
+  };
   return (
     <Box
   sx={{
@@ -70,7 +85,7 @@ function Competencies() {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 8, // Augmente l’espace entre les sections
+    gap: 2 // Augmente l’espace entre les sections
   }}
 >
   {/* Skills Section */}
@@ -78,6 +93,7 @@ function Competencies() {
 sx={
   {backgroundColor: "rgba(0, 0, 0, 0.4)",
    padding:4, // Fond noir
+   width: "100%",
     
  }}> <Typography variant="h3" gutterBottom color="black">
     Competencies
@@ -140,39 +156,78 @@ sx={
 
 
   {/* Certificates Section */}
-  <Box
-    sx={{
-      width: "100%",
-      maxWidth: 450,
-      textAlign: "center",
-      ml: 40, // Ajoute un espace à gauche
-    }}
-  >
-    <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
-      Certificates
-    </Typography>
-    <Slider {...settings}>
-      {certificates.map((cert, index) => (
-        <Card
-          key={index}
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 450,
+        textAlign: "center",
+        ml: 40,
+      }}
+    >
+      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
+        Certificates
+      </Typography>
+
+      <Slider {...settings}>
+        {certificates.map((cert, index) => (
+          <Card
+            key={index}
+            sx={{
+              margin: "auto",
+              maxWidth: 400,
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+              borderRadius: 3,
+              padding: 2,
+              cursor: "pointer",
+            }}
+            onMouseEnter={() => handleOpen(cert.image)} // open on hover
+          >
+            <CardMedia
+              component="img"
+              alt={cert.title}
+              height="200"
+              image={cert.image}
+            />
+            <CardContent>
+              <Typography variant="h6">{cert.title}</Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Slider>
+
+      {/* Full-screen image modal */}
+      <Modal open={open} onClose={handleClose}>
+        <Box
           sx={{
-            margin: "auto",
-            maxWidth: 400,
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-            borderRadius: 3,
-            padding: 2,
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
           }}
+          onClick={handleClose}
         >
-          <Lens hovering={hovering} setHovering={setHovering}>
-            <CardMedia component="img" alt={cert.title} height="200" image={cert.image} />
-          </Lens>
-          <CardContent>
-            <Typography variant="h6">{cert.title}</Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </Slider>
-  </Box>
+          <Box
+            component="img"
+            src={selectedImage}
+            alt="Certificate"
+            sx={{
+              maxWidth: "90%",
+              maxHeight: "90%",
+              borderRadius: 2,
+              boxShadow: 5,
+              transform: "scale(1)",
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "scale(1.05)",
+              },
+            }}
+          />
+        </Box>
+      </Modal>
+    </Box>
 </Box>
 
   );

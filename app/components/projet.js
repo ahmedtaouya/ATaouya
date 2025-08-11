@@ -8,6 +8,7 @@ import GRR from "public/images/GRR.png";
 
 const testimonials = [
     {
+       link : "open demo",
       quote:
         " NUTRIFORME est une entreprise qui aide à manger équilibré et est la base de la santé et du bien-être de chacun.",
       name: "Nutrition projet",
@@ -15,6 +16,7 @@ const testimonials = [
       src: nutri,
     },
     {
+       link2 : "open demo",
       quote:
         "La solution ultime pour la gestion de copropriete de Maroc",
       name: "Syndinet",
@@ -36,6 +38,7 @@ const testimonials = [
       src: fallbackImage,
     },
     {
+       link3 : "open demo",
       quote:
         "MedTrack est une application de gestion de médicaments qui permet aux utilisateurs de suivre leur consommation de médicaments, de recevoir des rappels et de gérer leurs prescriptions.",
       name: "MEDTRACK",

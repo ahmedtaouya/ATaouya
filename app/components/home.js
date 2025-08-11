@@ -28,6 +28,34 @@ const  Home = () => {
         gap: '70px', // Add spacing between text and the Compare component
       }}
     >
+            {/* Right Side - Compare Component */}
+      <Box
+  sx={{
+    position: 'relative',
+    width: '28vw',
+    height: '28vw',
+    border: '2px solid #fff',
+    borderRadius: '50%',
+    boxShadow: '0 0 10px #fff',
+    overflow: 'hidden',
+    display: 'flex', // Ensures image is centered within the box
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}
+>
+  <img
+    src="images/ahmed.jpg"
+    alt="Ahmed TAOUYA"
+    style={{
+      position: 'absolute',
+      top: '0px',
+      display: 'block',
+      objectFit: 'cover',
+      width: '100%',
+    }}
+  />
+  {t("hero.greeting")}
+</Box>
       {/* Left Side - Text */}
       <Box
       sx={{
@@ -83,34 +111,7 @@ const  Home = () => {
 
     </Box>
 
-      {/* Right Side - Compare Component */}
-      <Box
-  sx={{
-    position: 'relative',
-    width: '28vw',
-    height: '28vw',
-    border: '2px solid #fff',
-    borderRadius: '50%',
-    boxShadow: '0 0 10px #fff',
-    overflow: 'hidden',
-    display: 'flex', // Ensures image is centered within the box
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}
->
-  <img
-    src="images/ahmed.jpg"
-    alt="Ahmed TAOUYA"
-    style={{
-      position: 'absolute',
-      top: '0px',
-      display: 'block',
-      objectFit: 'cover',
-      width: '100%',
-    }}
-  />
-  {t("hero.greeting")}
-</Box>
+
 
     </Box>
     

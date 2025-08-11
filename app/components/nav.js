@@ -31,8 +31,10 @@ const LanguageSelector = ({ language, handleLanguageChange, isMobile }) => (
             size="small"
             sx={{
                 boxShadow: "none",
-                ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                minWidth: 100,
+                borderRadius: 1,
+                bordercolor: "rgba(0, 0, 0, 0.23)",
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
+             
             }}
         >
             {[
@@ -119,7 +121,7 @@ function DrawerAppBar(props) {
                         <img
                             src="./images/ah.png"
                             alt="Logo"
-                            style={{ height: '70px' }}
+                            style={{ height: '90px' }}
                         />
                     </Typography>
                     <IconButton
@@ -128,7 +130,7 @@ function DrawerAppBar(props) {
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{ backgroundColor: 'white', '&:hover': { backgroundColor: '#1877F2', color: 'white' },
-                        marginRight: '8px' }}
+                        center: 'center', justifyContent: 'center' , marginRight: '8px' }}
                     >
                         <FaGithub size={25} color="#000" />
                     </IconButton>
@@ -145,9 +147,10 @@ function DrawerAppBar(props) {
 
 
                     {/* Language Selector */}
-                    <LanguageSelector
+                    <LanguageSelector 
                         language={language}
                         handleLanguageChange={handleLanguageChange}
+                        
                     />
 
                 </Toolbar>
