@@ -87,6 +87,7 @@ function Competencies() {
       })}
     >
       {/* Skills Section */}
+      
       <Card
         sx={(theme) => ({
           backgroundColor: "rgba(0, 0, 0, 0.4)",
@@ -98,9 +99,8 @@ function Competencies() {
           },
         })}
       >
-        <Typography variant="h3" gutterBottom sx={{ color: "black" }}>
-          Competencies
-        </Typography>
+   
+        
 
         <Box sx={{ mb: 4 }}>
           <Typography variant="h4" gutterBottom>
