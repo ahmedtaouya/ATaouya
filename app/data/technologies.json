@@ -86,6 +86,12 @@
         "name": "Figma",
         "designation": "ui/ux design",
         "image": "/stack/figma.png"
+      },
+        {
+        "id": 8,
+        "name": "Angular",
+        "designation": "framework",
+        "image": "/stack/angular.jpeg"
       }
     ],
     "databases": [
