@@ -1,39 +1,36 @@
-// pages/api/sendmail.js
+import nodemailer from "nodemailer";
 
-import nodemailer from 'nodemailer';
+export async function POST(request) {
+    const body = await request.json();
+  console.log("📩 Received body:", body); // 👈 DEBUG LOG
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  const { name, email, message } = body;
+    if (!name || !email || !message) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
-  const { to, subject, text } = req.body;
-
-  if (!to || !subject || !text) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  try {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: false, // use true if using 465
+      service: "gmail", // or your email provider
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: `"My App" <${process.env.SMTP_USER}>`,
-      to,
-      subject,
-      text,
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER, // send to yourself
+      subject: `New message from ${name}`,
+      text: `From: ${name} (${email})\n\n${message}`,
     });
 
-    res.status(200).json({ success: true, message: 'Email sent successfully' });
-  } catch (error) {
-    console.error('SendMail error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-}
+    return new Response(
+      JSON.stringify({ success: true, message: "Email sent successfully" }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } 
+
+

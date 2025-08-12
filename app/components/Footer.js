@@ -20,32 +20,35 @@ const Footer = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await fetch("/sendmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch("/sendmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
 
-      if (response.ok) {
-        setSuccess(true);
-        setFormData({ name: "", email: "", message: "" }); // Clear form
-      } else {
-        setSuccess(false);
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
+    if (response.ok) {
+      setSuccess(true);
+      setFormData({ name: "", email: "", message: "" }); // Clear form
+    } else {
       setSuccess(false);
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error sending email:", error);
+    setSuccess(false);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <Box sx={{ bgcolor: "transparent", py: 4 }}>
