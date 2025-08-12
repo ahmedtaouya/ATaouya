@@ -8,7 +8,7 @@ const resources = {
       "hero.greeting": "Hello",
       "hero.title": "My name is Ahmed TAOUYA",
       "button.descrption": " Software, future ingenieur and network engineer",
-      "button.download": "Download CV",
+      "button.download": "Download My CV",
       "career.title": "My Career Education",
       "career.experiences": [
         {
@@ -52,7 +52,7 @@ const resources = {
       "hero.greeting": "Bonjour",
       "hero.title": "Je m'appelle Ahmed TAOUYA ",
       "button.descrption": " Software, futur ingénieur informatique et réseaux",
-      "button.download": "Télécharger le CV",
+      "button.download": "Télécharger Mon CV",
       "career.title": "Mon Parcours Éducatif",
       "career.experiences": [
         {

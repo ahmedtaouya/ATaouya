@@ -15,9 +15,7 @@ const  Home = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        //backgroundImage: `url('./images/backgroung.jpg')`,
-        //backgroundSize: 'cover',
-        //backgroundPosition: 'center',
+       
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' }, // Column for small screens, row for medium and above
         justifyContent: 'center',
@@ -95,7 +93,7 @@ const  Home = () => {
           color: '#4e484a',
         },
       }}
-      href="/images/cv.pdf"
+      href="/images/CV.pdf"
       download="Ahmed_TAOUYA_CV.pdf"
     >
       <span
