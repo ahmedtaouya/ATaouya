@@ -77,7 +77,7 @@ function Me() {
             </CardBody>
           </CardContainer>
         </Box>
-        {/* Left section: scroll animation */}
+       
         <Box sx={{ 
           width: '100%', 
           maxWidth: { xs: '300px', md: '560px' },
