@@ -22,10 +22,10 @@ function Me() {
         <Box sx={{ 
           width: '40%', 
           maxWidth: { xs: '100%', md: '100%' },
-          paddingLeft: { xs: 1, md: 8 }
+          paddingLeft: { xs: 0, md: 8 }
         }}>
           <CardContainer className="inter-var">
-            <CardBody className="bg-[rgba(0,0,0,0.4)] relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border w-[500px] rounded-xl p-4">
+            <CardBody className="bg-[rgba(0,0,0,0.4)] relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border w-[450px] rounded-xl p-4">
               <Typography
                 variant="h4"
                 component="h1"
