@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin, FaBars, FaTimes, FaGlobe } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import "../i18n";
+import LOGO from "public/images/logoAT.png";
 import Image from "next/image";
 
 
@@ -75,11 +76,11 @@ const Navbar = () => {
             className="flex items-center"
           >
             <Image
-              src="/images/logoAT.png"
+              src={LOGO}
               alt="Logo"
-              width={70}
-              height={70}
-              className="h-16 w-18"
+              width={0}
+              height={90}
+              className="h-20 w-25"
             />
           </motion.div>
         </a>

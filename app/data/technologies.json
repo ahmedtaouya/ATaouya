@@ -122,9 +122,9 @@
       },
      {
         "id": 2,
-        "name": "Adobe EXPRESS",
-        "designation": "ui/ux design",
-        "image": "/stack/adobe.png"
+        "name": "UML",
+        "designation": "diagramming language",
+        "image": "/stack/uml.png"
       }
     ]
   }
