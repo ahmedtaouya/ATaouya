@@ -5,6 +5,8 @@ import { FaGithub, FaLinkedin, FaBars, FaTimes, FaGlobe } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import "../i18n";
+import Image from "next/image";
+
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,14 +60,12 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-        isScrolled ? "h-14 bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31] shadow-lg" : "h-20 bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${isScrolled ? "h-14 bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31] shadow-lg" : "h-20 bg-transparent"
+        }`}
     >
       <div
-        className={`max-w-7xl mx-auto px-4 h-full flex items-center justify-between transition-colors duration-300 ${
-          isScrolled ? "bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31]" : "bg-transparent"
-        }`}
+        className={`max-w-7xl mx-auto px-4 h-full flex items-center justify-between transition-colors duration-300 ${isScrolled ? "bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31]" : "bg-transparent"
+          }`}
       >
         {/* Logo */}
         <a href="#home" className="flex items-center">
@@ -74,7 +74,13 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
             className="flex items-center"
           >
-            <img src="/images/logoAT.png" alt="Logo" className="h-16 w-18" />
+            <Image
+              src="/images/logoAT.png"
+              alt="Logo"
+              width={70}
+              height={70}
+              className="h-16 w-18"
+            />
           </motion.div>
         </a>
 
@@ -84,11 +90,10 @@ const Navbar = () => {
             <a
               key={item.name}
               href={item.href}
-              className={`px-3 py-2 text-sm lg:text-base lg:px-4 font-medium rounded-xl transition-colors ${
-                isScrolled
+              className={`px-3 py-2 text-sm lg:text-base lg:px-4 font-medium rounded-xl transition-colors ${isScrolled
                   ? "text-white hover:text-black hover:bg-gray-100"
                   : "text-white hover:text-black hover:bg-white/80"
-              }`}
+                }`}
             >
               {item.name}
             </a>
@@ -107,11 +112,10 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                  isScrolled
+                className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${isScrolled
                     ? "bg-gray-100 text-black hover:bg-white hover:text-black"
                     : "bg-white/20 text-white hover:bg-white hover:text-black"
-                }`}
+                  }`}
                 aria-label={link.label}
               >
                 {link.icon}
@@ -123,11 +127,10 @@ const Navbar = () => {
           <div className="relative hidden sm:block">
             <button
               onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-              className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                isScrolled
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${isScrolled
                   ? "bg-gray-100 text-black hover:bg-white hover:text-black"
                   : "bg-white/20 text-white hover:bg-white hover:text-black"
-              }`}
+                }`}
               aria-label="Change language"
             >
               <FaGlobe className="text-lg" />
@@ -146,11 +149,10 @@ const Navbar = () => {
                     <button
                       key={language.code}
                       onClick={() => changeLanguage(language.code)}
-                      className={`block w-full text-left px-4 py-2 text-sm ${
-                        i18n.language === language.code
+                      className={`block w-full text-left px-4 py-2 text-sm ${i18n.language === language.code
                           ? "bg-gray-100 text-black"
                           : "text-gray-700 hover:bg-gray-100"
-                      }`}
+                        }`}
                     >
                       <span className="mr-2">{language.flag}</span>
                       {language.name}
@@ -164,11 +166,10 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
-              isScrolled
+            className={`md:hidden w-9 h-9 rounded-md flex items-center justify-center transition-colors ${isScrolled
                 ? "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
                 : "bg-white/20 text-white hover:bg-white hover:text-black"
-            }`}
+              }`}
             aria-label="Ouvrir le menu"
           >
             {mobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -211,11 +212,10 @@ const Navbar = () => {
                         changeLanguage(language.code);
                         setMobileMenuOpen(false);
                       }}
-                      className={`px-3 py-1 rounded-md text-sm ${
-                        i18n.language === language.code
+                      className={`px-3 py-1 rounded-md text-sm ${i18n.language === language.code
                           ? "bg-blue-100 text-blue-600"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
+                        }`}
                     >
                       {language.flag} {language.code.toUpperCase()}
                     </button>
