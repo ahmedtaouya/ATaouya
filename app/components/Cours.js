@@ -10,7 +10,9 @@ const certificates = [
   { title: "C++ Mastery", image: "/images/c++.png" },
   { title: "JavaScript Proficiency", image: "/images/js.png" },
   { title: "UI/UX Expertise", image: "/images/ui ux.png" },
-  { title: "React Developer", image: "/images/react.png" },
+  { title: "React Developer", image: "/images/react2.png" },
+  { title: "Software Engineering", image: "/images/soft.png" },
+  { title: "Python for Data Science", image: "/images/phython.png" },
 ];
 
 function Cours() {

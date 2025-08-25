@@ -1,61 +1,72 @@
-"use client";
+import React, { Suspense, useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
-import * as THREE from 'three';
-import React, { Suspense, useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, useGLTF, ContactShadows } from '@react-three/drei';
-import { useSpring } from '@react-spring/core';
-import { a as three } from '@react-spring/three';
-import { a as web } from '@react-spring/web';
+import CanvasLoader from "../Loader";
 
-function Model({ open, hinge, ...props }) {
-  const group = useRef();
-  const { nodes, materials } = useGLTF('/mac-draco.glb');
-
-  const [hovered, setHovered] = useState(false);
-  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered]);
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, open ? Math.cos(t / 10) / 10 + 0.25 : 0, 0.1);
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, open ? Math.sin(t / 10) / 4 : 0, 0.1);
-    group.current.rotation.z = THREE.MathUtils.lerp(group.current.rotation.z, open ? Math.sin(t / 10) / 10 : 0, 0.1);
-    group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, open ? (-2 + Math.sin(t)) / 3 : -4.3, 0.1);
-  });
+const Computers = () => {
+  const computer = useGLTF("./desktop_pc/scene.gltf");
 
   return (
-    <group ref={group} {...props} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} dispose={null}>
-      <three.group rotation-x={hinge} position={[0, -0.04, 0.41]}>
-        <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
-          <mesh material={materials.aluminium} geometry={nodes['Cube008'].geometry} />
-          <mesh material={materials['matte.001']} geometry={nodes['Cube008_1'].geometry} />
-          <mesh material={materials['screen.001']} geometry={nodes['Cube008_2'].geometry} />
-        </group>
-      </three.group>
-      <mesh material={materials.keys} geometry={nodes.keyboard.geometry} position={[1.79, 0, 3.45]} />
-      <group position={[0, -0.1, 3.39]}>
-        <mesh material={materials.aluminium} geometry={nodes['Cube002'].geometry} />
-        <mesh material={materials.trackpad} geometry={nodes['Cube002_1'].geometry} />
-      </group>
-      <mesh material={materials.touchbar} geometry={nodes.touchbar.geometry} position={[0, -0.03, 1.2]} />
-    </group>
+    <mesh>
+      <hemisphereLight intensity={0.15} groundColor="black" />
+      <spotLight
+        position={[-20, 50, 10]}
+        angle={0.12}
+        penumbra={1}
+        intensity={1}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <pointLight intensity={1} />
+      <primitive
+        object={computer.scene}
+        scale={0.75} // Keep scale normal for desktop
+        position={[0, -3.25, -1.5]}
+        rotation={[-0.01, -0.2, -0.1]}
+      />
+    </mesh>
   );
-}
+};
 
-export default function ComputersCanvas() {
-  const [open, setOpen] = useState(false);
-  const props = useSpring({ open: Number(open) });
+const ComputersCanvas = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
 
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, -30], fov: 35 }}>
-      <three.pointLight position={[10, 10, 10]} intensity={1.5} color="#ffffff" />
-      <Suspense fallback={null}>
-        <group rotation={[0, Math.PI, 0]} onClick={() => setOpen(!open)}>
-          <Model open={open} hinge={props.open.to([0, 1], [1.575, -0.425])} />
-        </group>
-        <Environment preset="city" />
-      </Suspense>
-      <ContactShadows position={[0, -4.5, 0]} opacity={0.4} scale={20} blur={1.75} far={4.5} />
-    </Canvas>
+    !isMobile && ( // Hide on mobile screens
+      <Canvas
+        frameloop="demand"
+        shadows
+        dpr={[1, 2]}
+        camera={{ position: [20, 3, 5], fov: 25 }}
+        gl={{ preserveDrawingBuffer: true }}
+      >
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+          <Computers />
+        </Suspense>
+        <Preload all />
+      </Canvas>
+    )
   );
-}
+};
+
+export default ComputersCanvas;

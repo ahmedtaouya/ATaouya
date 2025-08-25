@@ -15,7 +15,7 @@ const resources = {
           "title": "Baccalaureate",
           "company": "Lycee HASSAN II",
           "duration": "June 2023 - Sept 2023",
-          "description": "Developed and optimized web applications using React and Node.js."
+          "description": "Physics Science Baccalaureate ou plus couramment Baccalaureate in Physical Sciences"
         },
         {
           "title": "Specialized Technician",
@@ -60,7 +60,7 @@ const resources = {
           "title": "Baccalauréat",
           "company": "Lycée HASSAN II",
           "duration": "Juin 2023 - Sept 2023",
-          "description": "Développement et optimisation d’applications web avec React et Node.js."
+          "description": "Bac science physique"
         },
         {
           "title": "Technicien Spécialisé",
@@ -110,7 +110,7 @@ const resources = {
           "title": "البكالوريا",
           "company": "ثانوية الحسن الثاني",
           "duration": "يونيو 2023 - سبتمبر 2023",
-          "description": "تطوير وتحسين تطبيقات الويب باستخدام React و Node.js."
+          "description": "باكالوريا علوم فيزيائية"
         },
         {
           "title": "تقني متخصص",
