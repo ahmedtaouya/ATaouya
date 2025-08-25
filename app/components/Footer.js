@@ -1,17 +1,13 @@
+"use client";
 import React, { useState } from "react";
-import { Box, Container, Grid, Typography, TextField, Button } from "@mui/material";
 import { FaSearchLocation, FaPhone, FaMailBulk } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import "../i18n";
-// import ".next/server/app/api/sendmail";
 
-const Footer = () => {
+export default function Footer() {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
 
@@ -20,147 +16,129 @@ const Footer = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const response = await fetch("/sendmail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
+    try {
+      const response = await fetch("/sendmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      setSuccess(true);
-      setFormData({ name: "", email: "", message: "" }); // Clear form
-    } else {
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSuccess(false);
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
       setSuccess(false);
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Error sending email:", error);
-    setSuccess(false);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
-    <Box sx={{ bgcolor: "transparent", py: 4 }}>
-      <Container maxWidth="lg">
-        <Grid container spacing={10}>
-          {/* Contact Information Section */}
-          <Grid item xs={12} md={6}>
-            <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.4)", p: 4, borderRadius: "10px", boxShadow: 3 }}>
-              <Typography variant="h6" mb={2} sx={{ color: "white" }}>
-                {t("contactInfo")}
-              </Typography>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
-                  <FaSearchLocation size={20} color="white" />
-                  {t("location")}
-                </Typography>
-              </Box>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
-                  <FaPhone size={20} />
-                  {t("phone")}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography variant="body1" display="flex" alignItems="center" gap={1} sx={{ color: "white" }}>
-                  <FaMailBulk size={20} />
-                  {t("email")}
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
+    <footer className="  py-16 px-6 text-white">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+        {/* Contact Info */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700"
+        >
+          <h3 className="text-2xl font-bold mb-6">{t("contactInfo")}</h3>
+          <ul className="space-y-4">
+            <li className="flex items-center gap-3">
+              <FaSearchLocation className="text-teal-400 text-xl" />
+              <span>{t("location")}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <FaPhone className="text-teal-400 text-xl" />
+              <span>{t("phone")}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <FaMailBulk className="text-teal-400 text-xl" />
+              <span>{t("email")}</span>
+            </li>
+          </ul>
+        </motion.div>
 
-          {/* Get in Touch Form */}
-          <Grid item xs={12} md={6}>
-            <Box component="form" onSubmit={handleSubmit} sx={{ bgcolor: "rgba(0, 0, 0, 0.4)", p: 4, borderRadius: "10px", boxShadow: 3 }}>
-              <Typography variant="h6" mb={2} sx={{ color: "white" }}>
-                {t("getInTouch")}
-              </Typography>
-              <TextField
-                fullWidth
-                label={t("name")}
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                variant="outlined"
-                required
-                sx={{
-                  mb: 2,
-                  "& .MuiOutlinedInput-root": {
-                    color: "white",
-                    "& fieldset": { borderColor: "white" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
-                  },
-                }}
-                InputLabelProps={{ style: { color: "white" } }}
-              />
-              <TextField
-                fullWidth
-                label={t("emailLabel")}
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                variant="outlined"
-                required
-                sx={{
-                  mb: 2,
-                  "& .MuiOutlinedInput-root": {
-                    color: "white",
-                    "& fieldset": { borderColor: "white" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
-                  },
-                }}
-                InputLabelProps={{ style: { color: "white" } }}
-              />
-              <TextField
-                fullWidth
-                label={t("message")}
-                name="message"
-                multiline
-                rows={4}
-                value={formData.message}
-                onChange={handleChange}
-                variant="outlined"
-                required
-                sx={{
-                  mb: 3,
-                  "& .MuiOutlinedInput-root": {
-                    color: "white",
-                    "& fieldset": { borderColor: "white" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
-                  },
-                }}
-                InputLabelProps={{ style: { color: "white" } }}
-              />
-              <Button variant="contained" color="primary" fullWidth type="submit" disabled={loading}>
-                {loading ? t("sending") : t("submit")}
-              </Button>
-              {success !== null && (
-                <Typography mt={2} sx={{ color: success ? "green" : "red" }}>
-                  {success ? t("messageSent") : t("messageError")}
-                </Typography>
-              )}
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700"
+        >
+          <h3 className="text-2xl font-bold mb-6">{t("getInTouch")}</h3>
+          <div className="flex flex-col gap-4">
+            <input
+              type="text"
+              name="name"
+              placeholder={t("name")}
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full p-3 rounded-lg bg-gray-900/70 border border-gray-600 focus:border-teal-400 focus:ring-2 focus:ring-teal-500 outline-none transition"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder={t("emailLabel")}
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full p-3 rounded-lg bg-gray-900/70 border border-gray-600 focus:border-teal-400 focus:ring-2 focus:ring-teal-500 outline-none transition"
+            />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder={t("message")}
+              value={formData.message}
+              onChange={handleChange}
+              required
+              className="w-full p-3 rounded-lg bg-gray-900/70 border border-gray-600 focus:border-teal-400 focus:ring-2 focus:ring-teal-500 outline-none transition"
+            />
+            <motion.button
+              type="submit"
+              disabled={loading}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full py-3 rounded-lg bg-gradient-to-r from-teal-500 to-blue-500 font-semibold text-white shadow-lg hover:shadow-2xl transition-all"
+            >
+              {loading ? t("sending") : t("submit")}
+            </motion.button>
+
+            {success !== null && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`mt-2 text-sm ${
+                  success ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {success ? t("messageSent") : t("messageError")}
+              </motion.p>
+            )}
+          </div>
+        </motion.form>
+      </div>
+
+      {/* Footer Bottom */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        className="text-center mt-12 text-gray-400 text-sm"
+      >
+        © {new Date().getFullYear()} — {t("allRightsReserved")}
+      </motion.div>
+    </footer>
   );
-};
-
-export default Footer;
+}

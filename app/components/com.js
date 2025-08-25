@@ -1,242 +1,102 @@
 "use client";
-import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Divider,
-  Modal,
-} from "@mui/material";
-import Slider from "react-slick";
+
+import { useState, useEffect } from "react";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { AnimatedTooltip } from "./ui/animated-tooltip";
 import technologies from "../data/technologies";
+import Card3D from "./ui/3d-card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCode, faServer, faDatabase, faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 
 const { languages, frameworks, databases, systems } = technologies;
 
-const certificates = [
-  {
-    title: "The unix Workbench",
-    image: "/images/unix.png",
-    description: "View Certificate",
-  },
-  {
-    title: "C++ Mastery",
-    image: "/images/c++.png",
-    description: "View Certificate",
-  },
-  {
-    title: "JavaScript Proficiency",
-    image: "/images/js.png",
-    description: "View Certificate",
-  },
-  {
-    title: "UI/UX Expertise",
-    image: "/images/ui ux.png",
-    description: "View Certificate",
-  },
-  {
-    title: "React Developer",
-    image: "/images/react.png",
-    description: "View Certificate",
-  },
-  {
-    title: "Design Fondamental",
-    image: "/images/adobe.png",
-    description: "View Certificate",
-  },
-];
+const Competencies = () => {
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const { scrollY } = useViewportScroll();
 
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-};
+  // Parallax transforms
+  const parallax1 = useTransform(scrollY, [0, 500], [0, 50]);
+  const parallax2 = useTransform(scrollY, [0, 500], [0, -30]);
+  const parallax3 = useTransform(scrollY, [0, 500], [0, 40]);
 
-function Competencies() {
-  const [open, setOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleOpen = (image) => {
-    setSelectedImage(image);
-    setOpen(true);
+  // Animation variants
+  const cardVariants = {
+    
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", damping: 15, stiffness: 100, duration: 0.6 } },
+    hover: { y: -10, scale: 1.05, rotateX: 10, rotateY: 10, transition: { type: "spring", stiffness: 400, damping: 12 } }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedImage(null);
+  const iconVariants = {
+    visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 120, damping: 12, duration: 0.6 } },
+    hover: { scale: 1.2, rotate: [0, 360], transition: { duration: 0.8, repeat: Infinity, repeatType: "loop" } }
   };
+
+  const TechCard = ({ title, description, tooltipItems, gradient, index }) => (
+    <motion.div
+      variants={cardVariants}
+      
+      whileInView="visible"
+      whileHover="hover"
+      viewport={{ once: true }}
+      onHoverStart={() => setHoveredCard(index)}
+      onHoverEnd={() => setHoveredCard(null)}
+      className="h-full"
+    >
+      <div className={`${gradient} rounded-2xl p-6 shadow-xl border border-gray-700 overflow-hidden relative transition-transform duration-400`}>
+        <motion.div 
+          className="absolute inset-0 rounded-2xl bg-gradient-to-r from-teal-400/20 via-blue-500/20 opacity-0"
+          animate={{ opacity: hoveredCard === index ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+        />
+
+        <div className="flex flex-col items-center text-center relative z-10">
+          <motion.div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4" variants={iconVariants}>
+            <Card3D>
+              <FontAwesomeIcon
+                icon={
+                  title === "Front-end" ? faCode
+                  : title === "Back-end" ? faServer
+                  : title === "Database" ? faDatabase
+                  : faPaintBrush
+                }
+                className="text-3xl text-white"
+              />
+            </Card3D>
+          </motion.div>
+          <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
+          <p className="opacity-80 mb-4 text-gray-300">{description}</p>
+
+          <div className="technologies mt-6 relative z-10">
+            <h4 className="font-semibold text-white mb-3 text-center">Technologies</h4>
+            <div className="flex flex-row flex-wrap justify-center gap-3 p-0">
+              <AnimatedTooltip items={tooltipItems} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
 
   return (
-    <Box
-      sx={(theme) => ({
-        p: 4,
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
-        gap: 2,
-        [theme.breakpoints.down("md")]: {
-          flexDirection: "column",
-          alignItems: "center",
-        },
-      })}
-    >
-      {/* Skills Section */}
-      
-      <Card
-        sx={(theme) => ({
-          backgroundColor: "rgba(0, 0, 0, 0.4)",
-          padding: 4,
-          width: "100%",
-          color: "white",
-          [theme.breakpoints.down("md")]: {
-            padding: 2,
-          },
-        })}
-      >
-   
-        
+    <motion.div className="py-16 relative">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center text-white mb-2">Technology Stack</h1>
+        <p className="text-lg text-center text-gray-300 mb-12">Hover over each technology to see details</p>
 
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Programming Languages
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
-            Core technologies I work with daily:
-          </Typography>
-          <Container className="flex flex-row flex-wrap gap-4" sx={{ p: 0 }}>
-            <AnimatedTooltip items={languages} />
-          </Container>
-        </Box>
-        <Divider sx={{ my: 4, borderColor: "white" }} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <TechCard title="Front-end" description="User Interface Development" tooltipItems={languages} gradient="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700" index={0} />
+          <TechCard title="Back-end" description="Server & Application Logic" tooltipItems={frameworks} gradient="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700" index={1} />
+          <TechCard title="Database" description="Data Storage & Management" tooltipItems={databases} gradient="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700" index={2} />
+          <TechCard title="Graphic Design" description="Visual Design & UX/UI" tooltipItems={systems} gradient="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-gray-700" index={3} />
+        </div>
+      </div>
 
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Frameworks
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
-            Modern tools I use to build robust applications:
-          </Typography>
-          <Container className="flex flex-row flex-wrap gap-4" sx={{ p: 0 }}>
-            <AnimatedTooltip items={frameworks} />
-          </Container>
-        </Box>
-        <Divider sx={{ my: 4, borderColor: "white" }} />
-
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Database Technologies
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
-            Database systems I'm proficient with:
-          </Typography>
-          <Container className="flex flex-row flex-wrap gap-4" sx={{ p: 0 }}>
-            <AnimatedTooltip items={databases} />
-          </Container>
-        </Box>
-        <Divider sx={{ my: 4, borderColor: "white" }} />
-
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Operating Systems
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
-            Operating Systems:
-          </Typography>
-          <Container className="flex flex-row flex-wrap gap-4" sx={{ p: 0 }}>
-            <AnimatedTooltip items={systems} />
-          </Container>
-        </Box>
-      </Card>
-
-      {/* Certificates Section */}
-      <Box
-        sx={(theme) => ({
-          width: "100%",
-          maxWidth: 450,
-          textAlign: "center",
-          ml: 40,
-          [theme.breakpoints.down("lg")]: {
-            ml: 10,
-          },
-          [theme.breakpoints.down("md")]: {
-            ml: 0,
-            mt: 4,
-            maxWidth: "100%",
-          },
-        })}
-      >
-        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
-          Certificates
-        </Typography>
-
-        <Slider {...settings}>
-          {certificates.map((cert, index) => (
-            <Card
-              key={index}
-              sx={{
-                margin: "auto",
-                maxWidth: 400,
-                boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-                borderRadius: 3,
-                padding: 2,
-                cursor: "pointer",
-              }}
-              onMouseEnter={() => handleOpen(cert.image)}
-            >
-              <CardMedia
-                component="img"
-                alt={cert.title}
-                height="200"
-                image={cert.image}
-              />
-              <CardContent>
-                <Typography variant="h6">{cert.title}</Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </Slider>
-
-        {/* Full-screen image modal */}
-        <Modal open={open} onClose={handleClose}>
-          <Box
-            sx={{
-              position: "fixed",
-              inset: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.6)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 9999,
-            }}
-            onClick={handleClose}
-          >
-            <Box
-              component="img"
-              src={selectedImage}
-              alt="Certificate"
-              sx={{
-                maxWidth: "90%",
-                maxHeight: "90%",
-                borderRadius: 2,
-                boxShadow: 5,
-                transform: "scale(1)",
-                transition: "transform 0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
-              }}
-            />
-          </Box>
-        </Modal>
-      </Box>
-    </Box>
+      {/* Parallax floating backgrounds */}
+      <motion.div className="absolute -top-24 left-1/4 w-40 h-40 rounded-full bg-teal-500/20 blur-3xl -z-10" style={{ y: parallax1 }} />
+      <motion.div className="absolute -bottom-24 right-1/4 w-32 h-32 rounded-full bg-blue-500/20 blur-3xl -z-10" style={{ y: parallax2 }} />
+      <motion.div className="absolute top-1/2 left-1/3 w-24 h-24 rounded-full bg-purple-500/20 blur-2xl -z-10" style={{ y: parallax3 }} />
+    </motion.div>
   );
-}
+};
 
 export default Competencies;

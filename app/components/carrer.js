@@ -1,46 +1,36 @@
-import { Box, Typography, Card, CardContent, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const Career = () => {
   const { t } = useTranslation();
-
-  const experiences = t('career.experiences', { returnObjects: true });
+  const experiences = t("career.experiences", { returnObjects: true });
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: 'transparent', borderRadius: 2 }}>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+    <div className="p-8 bg-transparent rounded-lg">
+      <h2 className="text-3xl font-bold text-center mb-6">
         {t("career.title")}
-      </Typography>
+      </h2>
 
       {/* List of Experiences */}
-      {experiences.map((exp, index) => (
-        <Card
+      {Array.isArray(experiences) && experiences.map((exp, index) => (
+        <div
           key={index}
-          sx={{
-            mb: 3,
-            borderRadius: 2,
-            boxShadow: 3,
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            color: 'white',
-            transition: 'transform 0.3s',
-            '&:hover': { transform: 'translateY(-5px)', boxShadow: 6 },
-          }}
+          className="mb-6 rounded-xl shadow-lg rounded-2xl p-4 bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31] shadow-xl border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
-          <CardContent>
-            <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-2">
               {exp.title}
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary" sx={{ fontStyle: 'italic', color: 'white' }}>
+            </h3>
+            <p className="text-white text-opacity-80 italic mb-3">
               {exp.company} - {exp.duration}
-            </Typography>
-            <Divider sx={{ my: 1, borderColor: 'white' }} />
-            <Typography variant="body2" sx={{ color: 'white' }}>
+            </p>
+            <div className="border-t border-white border-opacity-30 my-3"></div>
+            <p className="text-white text-opacity-90">
               {exp.description}
-            </Typography>
-          </CardContent>
-        </Card>
+            </p>
+          </div>
+        </div>
       ))}
-    </Box>
+    </div>
   );
 };
 

@@ -1,118 +1,45 @@
 "use client";
 
 import React from 'react';
-import { Box, Typography ,Button } from '@mui/material';
-import { useRouter } from 'next/navigation'; 
-// import DownloadIcon from '@mui/icons-material/Download';
-// import Ah from 'public/images/ahmed.jpg';
 import { useTranslation } from 'react-i18next';
-const  Home = () => {
- 
 
+const Home = () => {
   const { t } = useTranslation();
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-       
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' }, // Column for small screens, row for medium and above
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: '#ffffff', // White text for contrast
-        textShadow: '1px 1px 5px rgba(0, 0, 0, 0.8)',
-        padding: '70px',
-        gap: '70px', // Add spacing between text and the Compare component
-      }}
-    >
-            {/* Right Side - Compare Component */}
-      <Box
-  sx={{
-    position: 'relative',
-    width: '28vw',
-    height: '28vw',
-    border: '2px solid #fff',
-    borderRadius: '50%',
-    boxShadow: '0 0 10px #fff',
-    overflow: 'hidden',
-    display: 'flex', // Ensures image is centered within the box
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}
->
-  <img
-    src="images/ahmed.jpg"
-    alt="Ahmed TAOUYA"
-    style={{
-      position: 'absolute',
-      top: '0px',
-      display: 'block',
-      objectFit: 'cover',
-      width: '100%',
-    }}
-  />
-  {t("hero.greeting")}
-</Box>
-      {/* Left Side - Text */}
-      <Box
-      sx={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: { xs: 'center', md: 'flex-start' },
-        textAlign: { xs: 'center', md: 'left' },
-      }}
-    >
-      <Typography variant="h2" gutterBottom>
-        {t("hero.greeting")}
-      </Typography>
-      <Typography variant="h4" gutterBottom>
-        {t("hero.title")}
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-      {t("button.descrption")}
-      </Typography>
-      <Button
-      variant="contained"
-      sx={{
-        textDecoration: 'none',
-        color: '#fff',
-        fontFamily: 'sans-serif',
-        fontWeight: 600,
-        borderRadius: '50px',
-        border: '2px rgba(0, 0, 0, 0.4)',
-        padding: '14px 40px',
-        position: 'relative',
-        overflow: 'hidden',
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-        transition: 'all 0.3s ease',
-        '&:hover': {
-          backgroundColor: '#fff',
-          color: '#4e484a',
-        },
-      }}
-      href="/images/CV.pdf"
-      download="Ahmed_TAOUYA_CV.pdf"
-    >
-      <span
-        style={{
-          position: 'relative',
-          zIndex: 2,
-        }}
-      >
-       {t("button.download")}
-      </span>
-    </Button>
-
-
-    </Box>
-
-
-
-    </Box>
-    
+    <div className="   bg-[url('/images/bghome.png')] bg-cover bg-center  flex flex-col md:flex-row justify-center items-center p-20 gap-1 h-screen relative">
+      {/* Overlay sombre */}
+      <div className="absolute inset-0 bg-black/40"></div>
+      
+      {/* Right Side - Image Container */}
+      <div className="relative z-10 w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 border-2 border-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.7)] overflow-hidden">
+        <img
+          src="images/ahmed.jpg"
+          alt="Ahmed TAOUYA"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      {/* Left Side - Text Content */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+          {t("hero.greeting")}
+        </h2>
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-white drop-shadow-lg">
+          {t("hero.title")}
+        </h3>
+        <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white drop-shadow-lg max-w-2xl">
+          {t("button.descrption")}
+        </p>
+        <a
+          href="/images/CV.pdf"
+          download="Ahmed_TAOUYA_CV.pdf"
+          className="no-underline text-white font-sans font-semibold rounded-full border-2 border-white py-3 px-10 bg-black/50 transition-all duration-300 hover:bg-white hover:text-gray-900 hover:scale-105 hover:shadow-lg animate-bounce "
+        >
+          {t("button.download")}
+        </a>
+      </div>
+    </div>
   );
 }
 

@@ -1,254 +1,248 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { FormControl, Select, MenuItem } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import Flag from "react-world-flags";
+import React, { useState, useEffect } from "react";
+import { FaGithub, FaLinkedin, FaBars, FaTimes, FaGlobe } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import "../i18n";
 
-const drawerWidth = 240;
-const navItems = ['Linkedin', 'Github'];
-
-const LanguageSelector = ({ language, handleLanguageChange }) => (
-  <FormControl sx={{ 
-    mr: { xs: 0, sm: 2 },
-    minWidth: { xs: 80, sm: 120 }
-  }} size="small">
-    <Select
-      value={language}
-      onChange={handleLanguageChange}
-      size="small"
-      sx={{
-        boxShadow: "none",
-        borderRadius: 1,
-        borderColor: "rgba(0, 0, 0, 0.23)",
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        '& .MuiSelect-select': {
-          padding: { xs: '8px 12px', sm: '8px 16px' }
-        }
-      }}
-    >
-      {[
-        { code: "fr", flag: "FR", label: "FR" },
-        { code: "en", flag: "US", label: "EN" },
-        { code: "ar", flag: "MA", label: "AR" },
-      ].map((lang) => (
-        <MenuItem key={lang.code} value={lang.code}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Typography variant="body2" color="text.primary">
-              {lang.label}
-            </Typography>
-            <Flag code={lang.flag} style={{ width: 24, height: 16 }} />
-          </Box>
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
-);
-
-function DrawerAppBar(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
-
-  const handleLanguageChange = (event) => {
-    const lng = event.target.value;
-    setLanguage(lng);
-    i18n.changeLanguage(lng);
-  };
 
   useEffect(() => {
-    setLanguage(i18n.language);
-  }, [i18n.language]);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        <img
-          src="./images/ah.png"
-          alt="Logo"
-          style={{ height: '60px' }}
-        />
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton 
-              sx={{ textAlign: 'center' }}
-              component="a"
-              href={
-                item === 'Linkedin' 
-                  ? 'https://www.linkedin.com/in/ahmed-taouya-3b3563252/' 
-                  : 'https://github.com/ahmedtaouya'
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ListItemText 
-                primary={item} 
-                primaryTypographyProps={{ 
-                  color: 'text.primary',
-                  fontWeight: 'medium'
-                }} 
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  // 👉 Ancres au lieu des routes
+  const navItems = [
+    { name: t("home"), href: "#home" },
+    { name: t("experiences"), href: "#experiences" },
+    { name: t("projects"), href: "#projet" },
+    { name: t("contact"), href: "#contact" },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <FaGithub className="text-lg" />,
+      href: "https://github.com/ahmedtaouya",
+      label: "GitHub",
+    },
+    {
+      icon: <FaLinkedin className="text-lg" />,
+      href: "https://linkedin.com/in/ahmed-taouya-3b3563252/",
+      label: "LinkedIn",
+    },
+  ];
+
+  const languages = [
+    { code: "fr", name: "Français", flag: "🇫🇷" },
+    { code: "en", name: "English", flag: "🇺🇸" },
+    { code: "ar", name: "العربية", flag: "🇲🇦" },
+  ];
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    setLanguageMenuOpen(false);
+  };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        component="nav"
-        sx={{
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
-          backdropFilter: 'blur(8px)',
-        }}
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+        isScrolled ? "h-14 bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31] shadow-lg" : "h-20 bg-transparent"
+      }`}
+    >
+      <div
+        className={`max-w-7xl mx-auto px-4 h-full flex items-center justify-between transition-colors duration-300 ${
+          isScrolled ? "bg-gradient-to-b from-[#202A31] via-[#3A4852] to-[#202A31]" : "bg-transparent"
+        }`}
       >
-        <Toolbar sx={{
-          minHeight: { xs: 56, sm: 64 },
-          paddingX: { xs: 1, sm: 2 }
-        }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ 
-              mr: 2, 
-              display: { sm: 'none' },
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.1)'
-              }
-            }}
+        {/* Logo */}
+        <a href="#home" className="flex items-center">
+          <motion.div
+            whileHover={{ scale: 1.5 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center"
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ 
-              flexGrow: 1, 
-              display: 'flex', 
-              alignItems: 'center',
-              '& img': {
-                height: { xs: '70px', sm: '90px' }
-              }
-            }}
-          >
-            <img
-              src="./images/ah.png"
-              alt="Logo"
-            />
-          </Typography>
-          <Box sx={{ 
-            display: 'flex',
-            alignItems: 'center',
-            gap: { xs: 0.5, sm: 1 }
-          }}>
-            <IconButton
-              component="a"
-              href="https://github.com/ahmedtaouya"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ 
-                backgroundColor: 'white', 
-                '&:hover': { 
-                  backgroundColor: '#1877F2', 
-                  '& svg': {
-                    color: 'white'
-                  }
-                },
-                padding: { xs: '6px', sm: '8px' },
-                marginRight: { xs: '4px', sm: '8px' }
-              }}
-            >
-              <FaGithub size={20} color="#000" />
-            </IconButton>
-            <IconButton
-              component="a"
-              href="https://www.linkedin.com/in/ahmed-taouya-3b3563252/"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ 
-                backgroundColor: 'white', 
-                '&:hover': { 
-                  backgroundColor: '#1DA1F2',
-                  '& svg': {
-                    color: 'white'
-                  }
-                },
-                padding: { xs: '6px', sm: '8px' },
-                marginRight: { xs: '4px', sm: '8px' }
-              }}
-            >
-              <FaLinkedin size={20} color="#000" />
-            </IconButton>
+            <img src="/images/logoAT.png" alt="Logo" className="h-16 w-18" />
+          </motion.div>
+        </a>
 
-            <LanguageSelector 
-              language={language}
-              handleLanguageChange={handleLanguageChange}
-            />
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { 
-              boxSizing: 'border-box', 
-              width: drawerWidth,
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              backdropFilter: 'blur(8px)'
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box>
-    </Box>
+        {/* Navigation items - Desktop */}
+        <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={`px-3 py-2 text-sm lg:text-base lg:px-4 font-medium rounded-xl transition-colors ${
+                isScrolled
+                  ? "text-white hover:text-black hover:bg-gray-100"
+                  : "text-white hover:text-black hover:bg-white/80"
+              }`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Right section: Social links and language selector */}
+        <div className="flex items-center space-x-3">
+          {/* Social links */}
+          <div className="hidden sm:flex items-center space-x-2">
+            {socialLinks.map((link) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                  isScrolled
+                    ? "bg-gray-100 text-black hover:bg-white hover:text-black"
+                    : "bg-white/20 text-white hover:bg-white hover:text-black"
+                }`}
+                aria-label={link.label}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Language selector */}
+          <div className="relative hidden sm:block">
+            <button
+              onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                isScrolled
+                  ? "bg-gray-100 text-black hover:bg-white hover:text-black"
+                  : "bg-white/20 text-white hover:bg-white hover:text-black"
+              }`}
+              aria-label="Change language"
+            >
+              <FaGlobe className="text-lg" />
+            </button>
+
+            <AnimatePresence>
+              {languageMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-1 z-50"
+                >
+                  {languages.map((language) => (
+                    <button
+                      key={language.code}
+                      onClick={() => changeLanguage(language.code)}
+                      className={`block w-full text-left px-4 py-2 text-sm ${
+                        i18n.language === language.code
+                          ? "bg-gray-100 text-black"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                    >
+                      <span className="mr-2">{language.flag}</span>
+                      {language.name}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`md:hidden w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
+              isScrolled
+                ? "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+                : "bg-white/20 text-white hover:bg-white hover:text-black"
+            }`}
+            aria-label="Ouvrir le menu"
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
+          >
+            <div className="px-4 py-3 space-y-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                >
+                  {item.name}
+                </a>
+              ))}
+
+              {/* Language selector for mobile */}
+              <div className="pt-2">
+                <p className="px-3 py-2 text-sm font-medium text-gray-500">
+                  Language
+                </p>
+                <div className="flex space-x-2">
+                  {languages.map((language) => (
+                    <button
+                      key={language.code}
+                      onClick={() => {
+                        changeLanguage(language.code);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`px-3 py-1 rounded-md text-sm ${
+                        i18n.language === language.code
+                          ? "bg-blue-100 text-blue-600"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      {language.flag} {language.code.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-gray-200 flex space-x-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-colors"
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
-}
-
-DrawerAppBar.propTypes = {
-  window: PropTypes.func,
 };
 
-export default DrawerAppBar;
+export default Navbar;

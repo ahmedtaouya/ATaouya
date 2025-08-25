@@ -6,25 +6,74 @@
         "designation": "Programming language",
         "image": "/stack/Unofficial_JavaScript_logo_2.svg.png"
       },
+    
       {
         "id": 2,
-        "name": "PHP",
-        "designation": "Programming language",
-        "image": "/stack/php.png"
-      },
-      {
-        "id": 3,
         "name": "HTML",
         "designation": "Markup language",
         "image": "/stack/html5.webp"
       },
       {
-        "id": 4,
+        "id": 3,
         "name": "CSS",
         "designation": "Style language",
         "image": "/stack/css.webp"
       },
+       {
+        "id": 4,
+        "name": "Next",
+        "designation": "React framework",
+        "image": "/stack/next.jpg"
+      },
       {
+        "id": 5,
+        "name": "Tailwind",
+        "designation": "CSS framework",
+        "image": "/stack/tailwind.webp"
+      },
+      {
+        "id": 6,
+        "name": "Bootstrap",
+        "designation": "CSS framework",
+        "image": "/stack/bootstrap.jpg"
+      },
+       {
+        "id": 8,
+        "name": "React",
+        "designation": "JavaScript library",
+        "image": "/stack/react.jpg"
+      },
+       {
+        "id": 7,
+        "name": "Angular",
+        "designation": "framework",
+        "image": "/stack/angular.jpeg"
+      }
+    ],
+    "frameworks": [
+     
+        {
+        "id": 1,
+        "name": "PHP",
+        "designation": "Programming language",
+        "image": "/stack/php.png"
+      },
+     
+      
+      {
+        "id": 2,
+        "name": "Laravel",
+        "designation": "PHP framework",
+        "image": "/stack/laravel.webp"
+      },
+      {
+        "id": 3,
+        "name": "Express",
+        "designation": "Node.js framework",
+        "image": "/stack/express.png"
+      },
+    
+       {
         "id": 5,
         "name": "C++",
         "designation": "Programming language",
@@ -42,57 +91,7 @@
         "designation": "Programming language",
         "image": "/stack/python.png"
       }
-    ],
-    "frameworks": [
-      {
-        "id": 1,
-        "name": "React",
-        "designation": "JavaScript library",
-        "image": "/stack/react.jpg"
-      },
-      {
-        "id": 2,
-        "name": "Next",
-        "designation": "React framework",
-        "image": "/stack/next.jpg"
-      },
-      {
-        "id": 3,
-        "name": "Tailwind",
-        "designation": "CSS framework",
-        "image": "/stack/tailwind.webp"
-      },
-      {
-        "id": 4,
-        "name": "Bootstrap",
-        "designation": "CSS framework",
-        "image": "/stack/bootstrap.jpg"
-      },
-      
-      {
-        "id": 5,
-        "name": "Laravel",
-        "designation": "PHP framework",
-        "image": "/stack/laravel.webp"
-      },
-      {
-        "id": 6,
-        "name": "Express",
-        "designation": "Node.js framework",
-        "image": "/stack/express.png"
-      },
-      {
-        "id": 7,
-        "name": "Figma",
-        "designation": "ui/ux design",
-        "image": "/stack/figma.png"
-      },
-        {
-        "id": 8,
-        "name": "Angular",
-        "designation": "framework",
-        "image": "/stack/angular.jpeg"
-      }
+       
     ],
     "databases": [
       {
@@ -115,18 +114,18 @@
       }
     ],
     "systems": [
-        {
-          "id": 1,
-          "name": "Linux",
-          "designation": "systeme d'exploitation",
-          "image": "/stack/Linux-Logo.png"
-        },
-        {
-          "id": 2,
-          "name": "windows",
-          "designation": "systeme d'exploitation",
-          "image": "/stack/ww.avif"
-        }
-      ]
+         {
+        "id": 1,
+        "name": "Figma",
+        "designation": "ui/ux design",
+        "image": "/stack/figma.png"
+      },
+     {
+        "id": 2,
+        "name": "Adobe EXPRESS",
+        "designation": "ui/ux design",
+        "image": "/stack/adobe.png"
+      }
+    ]
   }
   

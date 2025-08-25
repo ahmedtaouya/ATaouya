@@ -6,7 +6,7 @@ const resources = {
   en: {
     translation: {
       "hero.greeting": "Hello",
-      "hero.title": "My name is Ahmed TAOUYA",
+      "hero.title": "I'm  Ahmed TAOUYA",
       "button.descrption": " Software, future ingenieur and network engineer",
       "button.download": "Download My CV",
       "career.title": "My Career Education",
@@ -30,20 +30,21 @@ const resources = {
           "description": "Built responsive websites for clients using HTML, CSS, and JavaScript."
         }
       ],
-      
-    "title": "Full-stack Developer",
-    "description1": "Passionate about innovation and modern technologies, I am a versatile developer with expertise in web development and software design. Currently in my third year of computer and network engineering at EMSI.",
-    "description2": "My experience includes ambitious projects and participation in a hackathon, where I won first place with an innovative solution developed in a team.",
-    "description3": "My analytical mindset, ability to solve complex problems, and passion for collaborative work allow me to thrive in dynamic environments.",
-    "contactInfo": "Contact Information",
-    "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
-    "phone": "0652954880",
-    "email": "ahmad.taouya@gmail.com",
-    "getInTouch": "Get in Touch",
-    "name": "Name",
-    "emailLabel": "Email",
-    "message": "Message",
-    "submit": "Submit"
+
+      "description1": " Passionate about innovation and modern technologies, I am a versatile developer with expertise in web development and software design. Currently, I am in my third year of Computer and Network Engineering at EMSI, constantly seeking opportunities to grow and challenge myself.",
+      "description2": "My experience spans ambitious projects, hackathons, and collaborative work, including winning first place in a team-based hackathon with an innovative solution. I excel at translating complex requirements into elegant, functional solutions using technologies like React.js, Node.js, Angular, and more.",
+      "description3": "I have a strong analytical mindset and a natural curiosity, which enables me to tackle complex problems efficiently. I enjoy working in dynamic environments and thrive when collaborating with diverse teams to bring impactful projects to life.",
+      "description4": "Beyond coding, I am deeply interested in modern UI/UX practices, system architecture, and continuous learning. I am committed to writing clean, maintainable code and delivering solutions that balance performance, usability, and innovation.",
+       "quote": "MedTrack is a medication management app that lets users track their medicine intake, get reminders, and manage their prescriptions.",
+      "contactInfo": "Contact Information",
+      "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
+      "phone": "0652954880",
+      "email": "ahmad.taouya@gmail.com",
+      "getInTouch": "Get in Touch",
+      "name": "Name",
+      "emailLabel": "Email",
+      "message": "Message",
+      "submit": "Submit"
 
     }
   },
@@ -74,20 +75,27 @@ const resources = {
           "description": "Création de sites web responsifs pour des clients en utilisant HTML, CSS et JavaScript."
         }
       ],
-  
-    "title": "Développeur Full-stack",
-    "description1": "Passionné par l'innovation et les technologies modernes, je suis un développeur polyvalent avec une expertise en développement web et en conception de logiciels. Actuellement en 3ème année d’ingénierie informatique et réseaux à l’EMSI.",
-    "description2": "Mon expérience inclut des projets ambitieux, ainsi que la participation à un hackathon, où j'ai remporté la première place grâce à une solution innovante développée en équipe.",
-    "description3": "Mon esprit d’analyse, ma capacité à résoudre des problèmes complexes et mon goût pour le travail collaboratif me permettent de m’épanouir dans des environnements dynamiques.",
-  "contactInfo": "Informations de contact",
-        "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
-        "phone": "0652954880",
-        "email": "ahmad.taouya@gmail.com",
-        "getInTouch": "Nous contacter",
-        "name": "Nom",
-        "emailLabel": "E-mail",
-        "message": "Message",
-        "submit": "Envoyer"
+
+      "description1": "Passionné par l'innovation et les technologies modernes, je suis un développeur polyvalent avec une expertise en développement web et conception logicielle. Actuellement, je suis en 3ème année d’ingénierie informatique et réseaux à l’EMSI, toujours à la recherche d’opportunités pour grandir et me challenger.",
+
+      "description2": "Mon expérience couvre des projets ambitieux, des hackathons et du travail collaboratif, y compris une première place gagnée en équipe lors d’un hackathon avec une solution innovante. Je suis doué pour traduire des exigences complexes en solutions élégantes et fonctionnelles grâce à des technologies comme React.js, Node.js, Angular, et plus.",
+
+      "description3": "J’ai une forte capacité d’analyse et une curiosité naturelle, ce qui me permet de résoudre efficacement des problèmes complexes. J’aime travailler dans des environnements dynamiques et je m’épanouis en collaboration avec des équipes diverses pour concrétiser des projets impactants.",
+
+      "description4": "Au-delà du code, je m'intéresse profondément aux pratiques modernes de l’UI/UX, à l’architecture système et à l’apprentissage continu. Je m’engage à écrire un code propre, maintenable et à fournir des solutions qui équilibrent performance, usability, et innovation.", "contactInfo": "Informations de contact",
+      "Expériences1": "Expériences",
+      "Expériences2": "Expériences",
+      "Expériences3": "Expériences",
+          "quote": "MultiQuiz de Questions avec un système de points et de chat en temps réel.",
+
+      "location": "4 avenue SIDI maussa doukali, SALE, SALA AL JADIDA",
+      "phone": "0652954880",
+      "email": "ahmad.taouya@gmail.com",
+      "getInTouch": "Nous contacter",
+      "name": "Nom",
+      "emailLabel": "E-mail",
+      "message": "Message",
+      "submit": "Envoyer"
     }
   },
   ar: {
@@ -117,21 +125,29 @@ const resources = {
           "description": "تصميم مواقع ويب متجاوبة للعملاء باستخدام HTML و CSS و JavaScript."
         }
       ],
-     
-        "title": "مطوّر Full-stack",
-        "description1": "شغوف بالابتكار والتقنيات الحديثة، أنا مطوّر متعدد المهارات بخبرة في تطوير الويب وتصميم البرمجيات. حاليًا في السنة الثالثة من الهندسة المعلوماتية والشبكات في EMSI.",
-        "description2": "تشمل خبرتي مشاريع طموحة، بالإضافة إلى المشاركة في هاكاثون، حيث فزت بالمركز الأول بفضل حل مبتكر تم تطويره ضمن فريق.",
-        "description3": "تسمح لي قدرتي التحليلية، والقدرة على حل المشكلات المعقدة، وشغفي بالعمل التعاوني، بالنجاح في بيئات ديناميكية.",
-        "contactInfo": "معلومات الاتصال",
-        "location": "4 شارع سيدي موسى الدوكالي، سلا، سلا الجديدة",
-        "phone": "0652954880",
-        "email": "ahmad.taouya@gmail.com",
-        "getInTouch": "اتصل بنا",
-        "name": "الاسم",
-        "emailLabel": "البريد الإلكتروني",
-        "message": "الرسالة",
-        "submit": "إرسال"
-   
+
+      "description1": "متحمس للابتكار والتقنيات الحديثة، أنا مطور متعدد المهارات بخبرة في تطوير الويب وتصميم البرمجيات. حالياً، أنا في السنة الثالثة من هندسة الحاسوب والشبكات في EMSI، وأسعى دائماً لاغتنام الفرص للنمو وتحدي نفسي.",
+
+      "description2": "خبرتي تشمل مشاريع طموحة، هاكاثونات، والعمل الجماعي، بما في ذلك الفوز بالمركز الأول في هاكاثون جماعي بحل مبتكر. أجيد تحويل المتطلبات المعقدة إلى حلول أنيقة وعملية باستخدام تقنيات مثل React.js، Node.js، Angular، وأكثر.",
+
+      "description3": "لدي عقلية تحليلية قوية وفضول طبيعي يمكنني من التعامل مع المشكلات المعقدة بكفاءة. أحب العمل في بيئات ديناميكية وأزدهر عند التعاون مع فرق متنوعة لتحقيق مشاريع مؤثرة.",
+
+      "description4": "بعيداً عن البرمجة، لدي اهتمام عميق بممارسات UI/UX الحديثة، وهندسة الأنظمة، والتعلم المستمر. ألتزم بكتابة كود نظيف وقابل للصيانة، وتقديم حلول توازن بين الأداء، وسهولة الاستخدام، والابتكار.",
+
+      "contactInfo": "معلومات الاتصال",
+
+
+    "quote": "MedTrack هو تطبيق لإدارة الأدوية يسمح للمستخدمين بمتابعة تناول أدويتهم، الحصول على تذكيرات، وإدارة وصفاتهم",
+
+      "location": "4 شارع سيدي موسى الدوكالي، سلا، سلا الجديدة",
+      "phone": "0652954880",
+      "email": "ahmad.taouya@gmail.com",
+      "getInTouch": "اتصل بنا",
+      "name": "الاسم",
+      "emailLabel": "البريد الإلكتروني",
+      "message": "الرسالة",
+      "submit": "إرسال"
+
     }
   }
 };
