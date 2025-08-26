@@ -160,15 +160,7 @@ export default function Footer() {
         </motion.form>
       </div>
 
-      {/* Footer Bottom */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
-        className="text-center mt-12 text-gray-400 text-sm"
-      >
-        © {new Date().getFullYear()} — {t("allRightsReserved")}
-      </motion.div>
+   
     </footer>
   );
 }

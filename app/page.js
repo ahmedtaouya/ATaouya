@@ -1,4 +1,3 @@
-
 "use client";
 import Nav from "./components/nav";
 import Home from "./components/home";
@@ -9,44 +8,41 @@ import Cours from "./components/Cours";
 import Projet from "./components/projet";
 import Footer from "./components/Footer";
 import Experience from "./components/experience";
+import Media from "./components/Media";
+
 export default function HomePage() {
   return (
-    <div className=" text-white bg-gradient-to-b from-gray-900 via-black to-gray-900 min-h-screen"
->
+    <div className="text-white bg-gradient-to-b from-gray-900 via-black to-gray-900 min-h-screen relative">
+      {/* Media fixed on the right */}
+
+
       {/* Navbar */}
       <Nav />
-     
-      
-            {/* Sections */}
-      <section
-        id="home"
-      >
+
+      {/* Sections */}
+      <section id="home">
         <Home />
       </section>
-        <Career />
-        <Com />
-       <Cours />
+
+      <Career />
+      <Com />
+      <Cours />
       <Me />
-      <section
-        id="experiences"
-      >
-      <Experience />
+
+      <section id="experiences">
+        <Experience />
       </section>
 
-      <section
-        id="projet"
-       
-      >
+      <section id="projet">
         <Projet />
       </section>
 
-      <section
-        id="contact"
-     
-      >
-       
+      <section id="contact">
         <Footer />
       </section>
+      {/* Social Media Buttons */}
+        <Media />
+
     </div>
   );
 }
