@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
 
 const testimonials = [
   {
     link: "https://nutriform.vercel.app/",
-    quote: "NUTRIFORME est une entreprise qui aide à manger équilibré et est la base de la santé et du bien-être de chacun.",
+    github: "https://github.com/ahmedtaouya/projet1",
+    quote:
+      "NUTRIFORME est une entreprise qui aide à manger équilibré et est la base de la santé et du bien-être de chacun.",
     name: "Nutrition projet",
     designation: "REACT.JS / NODE JS",
     src: "/images/nutri.png",
@@ -18,20 +21,25 @@ const testimonials = [
     src: "/images/syndi.png",
   },
   {
+    github: "https://github.com/ahmedtaouya/Dashboardcourse",
     quote: "Aide les etudiants a trouver leurs courses",
     name: "Tableau de bord",
     designation: "PHP NATIVE",
     src: "/images/TAB.jpg",
   },
   {
-    quote: "MultiQuiz de Questions avec un système de points et de chat en temps réel.",
+    github: "https://github.com/ahmedtaouya/quizreact",
+    quote:
+      "MultiQuiz de Questions avec un système de points et de chat en temps réel.",
     name: "Quiz",
     designation: "REACT.JS / NODE JS",
     src: "/images/default.png",
   },
   {
     link: "https://medtrack-vite.vercel.app/",
-    quote: "MedTrack est une application de gestion de médicaments qui permet aux utilisateurs de suivre leur consommation de médicaments, de recevoir des rappels et de gérer leurs prescriptions.",
+    github: "https://github.com/ahmedtaouya/medtrack",
+    quote:
+      "MedTrack est une application de gestion de médicaments qui permet aux utilisateurs de suivre leur consommation de médicaments, de recevoir des rappels et de gérer leurs prescriptions.",
     name: "MEDTRACK",
     designation: "VITE.JS",
     src: "/images/GRR.png",
@@ -100,14 +108,29 @@ function Projet() {
                   {testimonial.designation}
                 </p>
                 <p className="mb-6">{testimonial.quote}</p>
-                {testimonial.link && (
-                  <a
-                    href={testimonial.link}
-                    className="inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl shadow-lg hover:shadow-2xl transition-all"
-                  >
-                    Voir le projet
-                  </a>
-                )}
+                <div className="flex gap-3">
+                  {testimonial.link && (
+                    <a
+                      href={testimonial.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl shadow-lg hover:shadow-2xl transition-all"
+                    >
+                      Voir le projet
+                    </a>
+                  )}
+                  {testimonial.github && (
+                    <a
+                      href={testimonial.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-xl shadow hover:bg-gray-600 transition"
+                    >
+                      <FaGithub className="text-xl" />
+                      Code
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -141,14 +164,29 @@ function Projet() {
                         {testimonial.designation}
                       </p>
                       <p className="mb-6">{testimonial.quote}</p>
-                      {testimonial.link && (
-                        <a
-                          href={testimonial.link}
-                          className="inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg shadow-md hover:shadow-xl transition-all"
-                        >
-                          Voir le projet
-                        </a>
-                      )}
+                      <div className="flex gap-3">
+                        {testimonial.link && (
+                          <a
+                            href={testimonial.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-lg shadow-md hover:shadow-xl transition-all"
+                          >
+                            Voir le projet
+                          </a>
+                        )}
+                        {testimonial.github && (
+                          <a
+                            href={testimonial.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-lg shadow hover:bg-gray-600 transition"
+                          >
+                            <FaGithub className="text-xl" />
+                            Code
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 </div>
