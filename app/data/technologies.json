@@ -8,45 +8,57 @@
     },
     {
       "id": 2,
+      "name": "TypeScript",
+      "designation": "Programming language",
+      "image": "/stack/typescript.png"
+    },
+    {
+      "id": 3,
       "name": "HTML",
       "designation": "Markup language",
       "image": "/stack/html5.webp"
     },
     {
-      "id": 3,
+      "id": 4,
       "name": "CSS",
       "designation": "Style language",
       "image": "/stack/css.webp"
     },
     {
-      "id": 4,
+      "id": 5,
       "name": "Next.js",
       "designation": "React framework",
       "image": "/stack/next.jpg"
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "Tailwind",
       "designation": "CSS framework",
       "image": "/stack/tailwind.webp"
     },
     {
-      "id": 6,
+      "id": 7,
       "name": "Bootstrap",
       "designation": "CSS framework",
       "image": "/stack/bootstrap.jpg"
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "React.js",
       "designation": "JavaScript library",
       "image": "/stack/react.jpg"
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "AngularJS",
       "designation": "Framework",
       "image": "/stack/angular.jpeg"
+    },
+    {
+      "id": 10,
+      "name": "Vite.js",
+      "designation": "JavaScript framework",
+      "image": "/stack/vite.jpeg"
     }
   ],
   "frameworks": [
@@ -56,35 +68,55 @@
       "designation": "Programming language",
       "image": "/stack/php.png"
     },
-    {
+     {
       "id": 2,
+      "name": "Python",
+      "designation": "Programming language",
+      "image": "/stack/python.png"
+    },
+  
+        {
+      "id": 3,
+      "name": "Java",
+      "designation": "Programming language",
+      "image": "/stack/java.png"
+    },
+ 
+    {
+      "id": 4,
+      "name": "C#",
+      "designation": "Programming language",
+      "image": "/stack/csherap.png"
+    },
+       {
+      "id": 5,
+      "name": "Express",
+      "designation": "Node.js framework",
+      "image": "/stack/express.png"
+    },
+      {
+      "id": 6,
       "name": "Laravel",
       "designation": "PHP framework",
       "image": "/stack/laravel.webp"
     },
     {
-      "id": 3,
-      "name": "Express",
-      "designation": "Node.js framework",
-      "image": "/stack/express.png"
+      "id": 7,
+      "name": "Dotnet",
+      "designation": "Programming language",
+      "image": "/stack/dotnet.png"
     },
     {
-      "id": 4,
-      "name": "C++",
-      "designation": "Programming language",
-      "image": "/stack/c++.jpeg"
+      "id": 8,
+      "name": "Django",
+      "designation": "Python framework",
+      "image": "/stack/django.png"
     },
     {
-      "id": 5,
-      "name": "Java",
-      "designation": "Programming language",
-      "image": "/stack/java.png"
-    },
-    {
-      "id": 6,
-      "name": "Python",
-      "designation": "Programming language",
-      "image": "/stack/python.png"
+      "id": 9,
+      "name": "Spring Boot",
+      "designation": "Java framework",
+      "image": "/stack/springboot.png"
     }
   ],
   "databases": [
@@ -105,6 +137,18 @@
       "name": "MongoDB",
       "designation": "Database",
       "image": "/stack/mongodb.svg"
+    },
+    {
+      "id": 4,
+      "name": "Oracle",
+      "designation": "Database",
+      "image": "/stack/oracle.jpeg"
+    },
+    {
+      "id": 5,
+      "name": "PostgreSQL",
+      "designation": "Database",
+      "image": "/stack/postgresql.png"
     }
   ],
   "systems": [
